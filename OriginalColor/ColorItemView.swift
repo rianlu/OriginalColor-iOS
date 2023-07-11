@@ -1,5 +1,5 @@
 //
-//  OriginalColorApp.swift
+//  ColorItemView.swift
 //  OriginalColor
 //
 //  Created by Lu on 2023/7/7.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct OriginalColorApp: View {
+struct ColorItemView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct OriginalColorApp_Previews: PreviewProvider {
+struct ColorItemView_Previews: PreviewProvider {
     static var previews: some View {
-        OriginalColorApp()
+        ColorItemView()
     }
 }
