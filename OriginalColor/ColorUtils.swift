@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class ColorUtils {
+    func getDarkerColor() -> Int {
+        return 0
+    }
+}

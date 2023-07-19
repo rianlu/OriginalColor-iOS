@@ -7,14 +7,11 @@
 
 import SwiftUI
 
-struct OriginalColorApp: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct OriginalColorApp_Previews: PreviewProvider {
-    static var previews: some View {
-        OriginalColorApp()
+@main
+struct LandmarksApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
     }
 }

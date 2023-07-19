@@ -9,7 +9,7 @@ import Foundation
 
 class ReadData: ObservableObject {
     
-    @Published var colors = [OriginalColor]()
+    @Published var colors: [OriginalColor] = []
     
     init() {
         loadData()

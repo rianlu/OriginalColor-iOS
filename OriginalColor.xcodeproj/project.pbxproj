@@ -7,19 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89A2F5982A53E5E500C59108 /* OriginalColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5972A53E5E500C59108 /* OriginalColorApp.swift */; };
+		890BE6952A67E01600B56DD2 /* ColorShareCardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */; };
+		898337F72A55506100A815B7 /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898337F62A55506100A815B7 /* ReadData.swift */; };
 		89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5992A53E5E500C59108 /* ContentView.swift */; };
 		89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59B2A53E5E600C59108 /* Assets.xcassets */; };
-		89A2F5A02A53E5E600C59108 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59F2A53E5E600C59108 /* Preview Assets.xcassets */; };
+		89A2F5A72A53FBA300C59108 /* OriginalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5A62A53FBA300C59108 /* OriginalColor.swift */; };
+		89A4A9F22A57E00400BF6135 /* OriginalColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F12A57E00400BF6135 /* OriginalColorApp.swift */; };
+		89A4A9F42A57F0E200BF6135 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F32A57F0E200BF6135 /* ColorUtils.swift */; };
+		89A4A9F62A57F47B00BF6135 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */; };
+		89A4A9F82A57F49600BF6135 /* ColorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F72A57F49600BF6135 /* ColorItemView.swift */; };
+		89A4A9FA2A57FE2700BF6135 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F92A57FE2700BF6135 /* FilterView.swift */; };
+		89B5563B2A5A7F4500F1780C /* ColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */; };
+		89B5563D2A5AA51200F1780C /* ColorDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */; };
+		89CF40DD2A595E6200D5BC1D /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CF40DC2A595E6200D5BC1D /* colors.json */; };
+		89D94FD42A5D3C9D004E818B /* CopyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D94FD32A5D3C9D004E818B /* CopyListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShareCardItem.swift; sourceTree = "<group>"; };
+		898337F62A55506100A815B7 /* ReadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadData.swift; sourceTree = "<group>"; };
 		89A2F5942A53E5E500C59108 /* OriginalColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OriginalColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		89A2F5972A53E5E500C59108 /* OriginalColorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalColorApp.swift; sourceTree = "<group>"; };
 		89A2F5992A53E5E500C59108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		89A2F59B2A53E5E600C59108 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89A2F59D2A53E5E600C59108 /* OriginalColor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OriginalColor.entitlements; sourceTree = "<group>"; };
-		89A2F59F2A53E5E600C59108 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		89A2F5A62A53FBA300C59108 /* OriginalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalColor.swift; sourceTree = "<group>"; };
+		89A4A9F12A57E00400BF6135 /* OriginalColorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalColorApp.swift; sourceTree = "<group>"; };
+		89A4A9F32A57F0E200BF6135 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		89A4A9F72A57F49600BF6135 /* ColorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorItemView.swift; sourceTree = "<group>"; };
+		89A4A9F92A57FE2700BF6135 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewModel.swift; sourceTree = "<group>"; };
+		89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailItem.swift; sourceTree = "<group>"; };
+		89CF40DC2A595E6200D5BC1D /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
+		89D94FD32A5D3C9D004E818B /* CopyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +53,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		890BE6912A67DEFD00B56DD2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		890BE6922A67DFA700B56DD2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				89A2F5A62A53FBA300C59108 /* OriginalColor.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		890BE6932A67DFC200B56DD2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				89A4A9F72A57F49600BF6135 /* ColorItemView.swift */,
+				89A4A9F92A57FE2700BF6135 /* FilterView.swift */,
+				89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */,
+				89D94FD32A5D3C9D004E818B /* CopyListView.swift */,
+				89A2F5992A53E5E500C59108 /* ContentView.swift */,
+				890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		89A2F58B2A53E5E500C59108 = {
 			isa = PBXGroup;
 			children = (
@@ -52,11 +101,17 @@
 		89A2F5962A53E5E500C59108 /* OriginalColor */ = {
 			isa = PBXGroup;
 			children = (
-				89A2F5972A53E5E500C59108 /* OriginalColorApp.swift */,
-				89A2F5992A53E5E500C59108 /* ContentView.swift */,
+				890BE6932A67DFC200B56DD2 /* Views */,
+				890BE6922A67DFA700B56DD2 /* Models */,
+				890BE6912A67DEFD00B56DD2 /* ViewModels */,
+				89A4A9F12A57E00400BF6135 /* OriginalColorApp.swift */,
+				898337F62A55506100A815B7 /* ReadData.swift */,
 				89A2F59B2A53E5E600C59108 /* Assets.xcassets */,
 				89A2F59D2A53E5E600C59108 /* OriginalColor.entitlements */,
 				89A2F59E2A53E5E600C59108 /* Preview Content */,
+				89A4A9F32A57F0E200BF6135 /* ColorUtils.swift */,
+				89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */,
+				89CF40DC2A595E6200D5BC1D /* colors.json */,
 			);
 			path = OriginalColor;
 			sourceTree = "<group>";
@@ -64,7 +119,6 @@
 		89A2F59E2A53E5E600C59108 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				89A2F59F2A53E5E600C59108 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -127,8 +181,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A2F5A02A53E5E600C59108 /* Preview Assets.xcassets in Resources */,
 				89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */,
+				89CF40DD2A595E6200D5BC1D /* colors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +193,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A4A9FA2A57FE2700BF6135 /* FilterView.swift in Sources */,
+				89B5563D2A5AA51200F1780C /* ColorDetailItem.swift in Sources */,
+				89A2F5A72A53FBA300C59108 /* OriginalColor.swift in Sources */,
+				89D94FD42A5D3C9D004E818B /* CopyListView.swift in Sources */,
+				89A4A9F42A57F0E200BF6135 /* ColorUtils.swift in Sources */,
 				89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */,
-				89A2F5982A53E5E500C59108 /* OriginalColorApp.swift in Sources */,
+				890BE6952A67E01600B56DD2 /* ColorShareCardItem.swift in Sources */,
+				89A4A9F22A57E00400BF6135 /* OriginalColorApp.swift in Sources */,
+				89A4A9F62A57F47B00BF6135 /* SettingsScreen.swift in Sources */,
+				898337F72A55506100A815B7 /* ReadData.swift in Sources */,
+				89A4A9F82A57F49600BF6135 /* ColorItemView.swift in Sources */,
+				89B5563B2A5A7F4500F1780C /* ColorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,8 +339,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -311,8 +375,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
