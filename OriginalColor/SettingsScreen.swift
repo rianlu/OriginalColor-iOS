@@ -11,51 +11,63 @@ struct SettingsScreen: View {
     
     @AppStorage("vibration") var vibration: Bool = true
     @Environment(\.colorScheme) var colorScheme
-
+    let primartColor = Color("primaryColor")
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "获取失败"
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(primartColor)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(primartColor)]
+    }
+    
     var body: some View {
         ZStack {
-            Color.white
+            Color(UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
             .navigationTitle("关于")
+            .navigationBarTitleDisplayMode(.inline)
             VStack {
                 Form {
                     Section("") {
                         HStack {
                             Text("版本")
+                            Spacer()
                             Text(appVersion)
+                                .opacity(0.5)
                         }
                         HStack {
-                            Image(systemName: "iphone.radiowaves.left.and.right")
+//                            Image(systemName: "iphone.radiowaves.left.and.right")
                             Toggle(isOn: $vibration) {
                                 Text("震动")
                             }
+                            .tint(Color("primaryColor"))
                             .padding(.leading, 6)
                         }
-    //                    ShareLink(item: "原色——一款轻量简洁的配色APP，快去AppStore下载吧！") {
-    //                        Label("分享APP", systemImage: "square.and.arrow.up")
-    //                    }
-    //                    Label("给应用评分", systemImage: "hand.thumbsup")
-    //                        .foregroundColor(colorScheme == .light ? .black : .white)
-    //                        .onTapGesture {
-    //                            goToAppStore()
-    //                        }
+                        // TODO: Click Func
+                        Text("⭐️给应用评分⭐️")
                     }
                     HStack {
                         Spacer()
                         VStack(alignment: .center, content: {
-                            Text("App Developed by 禄眠")
-                            Text(.init("Copyright © 2013 by [Perchouli](http://dmyz.org/) Shanzhai to [Nipponcolors](http://nipponcolors.com/)"))
-                                .multilineTextAlignment(.center)
-                            Text("参看: 色谱 中科院科技情报编委会名词室.科学出版社,1957. Adobe RGB / CMYK FOGRA39, Dot Gain 15%")
-                                .multilineTextAlignment(.center)
+                            Group {
+                                Text(.init("Copyright © 2013 by [Perchouli](http://dmyz.org/) Shanzhai to [Nipponcolors](http://nipponcolors.com/)"))
+                                    .multilineTextAlignment(.center)
+                                Text("参看: 色谱 中科院科技情报编委会名词室.科学出版社,1957. Adobe RGB / CMYK FOGRA39, Dot Gain 15%")
+                                    .multilineTextAlignment(.center)
+                            }
+                            .foregroundColor(.gray)
+                            .font(.subheadline)
                         })
                         Spacer()
                     }
                         .listRowBackground(
                             Color(UIColor.systemGroupedBackground))
                 }
+                Text("App Developed by 禄眠")
+                    .foregroundColor(Color("primaryColor"))
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .opacity(0.8)
             }
-//                     Copyright © 2013 by <a href="http://dmyz.org/">Perchouli</a> Shanzhai to <a href="http://nipponcolors.com/">Nipponcolors</a>\n参看: 色谱 中科院科技情报编委会名词室.科学出版社,1957. Adobe RGB / CMYK FOGRA39, Dot Gain 15% <img src="http://zhongguose.com/img/share.jpg" width="1" alt="Screenshot" /><a href="https://beian.miit.gov.cn/">沪ICP备17025116号-2</a></p>
         }
     }
 }
@@ -76,6 +88,8 @@ private func goToAppStore() {
 
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsScreen()
+        NavigationStack {
+            SettingsScreen()
+        }
     }
 }

@@ -21,6 +21,10 @@ struct OriginalColor: Codable {
         return Color(red: getR(), green: getG(), blue: getB())
     }
     
+    func getRGB() -> (Double, Double, Double) {
+        return (getR(), getG(), getB())
+    }
+    
     func getR() -> Double {
         if RGB.count != 3 {
             return 0.0

@@ -21,24 +21,26 @@ struct ColorItemView: View {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(
                     LinearGradient(gradient: Gradient(stops: [
-                        .init(color: colorScheme == .light ?
-                              color.getRGBColor().opacity(0.6) :
-                                color.getRGBColor().opacity(0.9),
-                              location: 0),
-                        .init(color: color.getRGBColor(), location: 0.4)
+                        .init(color: color.getRGBColor()
+                            .opacity(colorScheme == .light ? 0.7 : 1), location: 0.3),
+                        .init(color: color.getRGBColor(), location: 1)
                     ]), startPoint: .top, endPoint: .bottom)
                 )
-            VStack{
+            VStack(alignment: .leading) {
                 Text(color.pinyin.uppercased())
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(color.getRGBColor()).opacity(0.6)
-                    .brightness(colorScheme == .light ? -0.1 : 0.3)
+                    .brightness(color.getRGBColor().isLight() ? -0.3 :
+                        (colorScheme == .light ? 0 : 0.3)
+                    )
                 Text(color.name)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(color.getRGBColor()).opacity(1)
-                    .brightness(colorScheme == .light ? -0.1 : 0.3)
+                    .foregroundColor(color.getRGBColor())
+                    .brightness(color.getRGBColor().isLight() ? -0.3 :
+                        (colorScheme == .light ? 0 : 0.3)
+                    )
                     .padding(.top, 2)
             }
             .padding()
@@ -64,6 +66,6 @@ struct ColorItemView: View {
 
 struct ColorItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorItemView(color: OriginalColor(RGB: [23, 129, 181], name: "哈哈哈", pinyin: "hahaha"))
+        ColorItemView(color: OriginalColor(RGB: [222, 28, 49], name: "唐菖蒲红", pinyin: "tangchangpuhong"))
     }
 }

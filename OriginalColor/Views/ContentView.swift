@@ -11,12 +11,18 @@ struct ContentView: View {
     
     @StateObject var viewModel: ColorViewModel = ColorViewModel()
     @Environment(\.colorScheme) var colorScheme
-    @State var showFab: Bool = false
+    @State var searchOrTop: Bool = false
     @State var scrollOffset: CGFloat = 0.00
     @State var showFilter: Bool = false
     @AppStorage("vibration：") var vibration: Bool = false
     let generator = UINotificationFeedbackGenerator()
     @AppStorage("fabColor") var fabColor: String = ""
+    let primartColor = Color("primaryColor")
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(primartColor)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(primartColor)]
+    }
     
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
     var columns: [GridItem] {
@@ -30,10 +36,12 @@ struct ContentView: View {
         }
     }
     
+    @State private var reader: ScrollViewProxy?
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                ScrollViewReader { proxy in
+                ScrollViewReader { reader in
                     ScrollView {
                         LazyVGrid(columns: columns) {
                             ForEach(viewModel.filterColorList, id: \.name) { color in
@@ -48,19 +56,24 @@ struct ContentView: View {
                         })
                         .onPreferenceChange(ViewOffsetKey.self) { offset in
                             withAnimation {
-                                showFab = offset > 50 ? offset < scrollOffset : true
+                                searchOrTop = offset > 50 ? offset < scrollOffset : true
                             }
                             scrollOffset = offset
                         }
                     }
+                    .onAppear {
+                        self.reader = reader
+                    }
                     .safeAreaInset(edge: .bottom, alignment: .trailing) {
-                        showFab ? Fab(showFilter: $showFilter) : nil
+                        Fab(
+                            showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
+                        )
                     }
                     .padding(.horizontal)
                     .navigationTitle("原色")
                     .navigationBarItems(
                         leading: Image("random.cube")
-                            .foregroundColor(colorScheme == .light ? .black : .white)
+                            .foregroundColor(primartColor)
                             .onTapGesture {
                                 let count = viewModel.filterColorList.count
                                 if count == 0 {
@@ -69,7 +82,7 @@ struct ContentView: View {
                                 if vibration {
                                     generator.notificationOccurred(.success)
                                 }
-                                proxy.scrollTo(
+                                reader.scrollTo(
                                     viewModel.filterColorList[Int.random(in: 0..<count)].name,
                                     anchor: .top
                                 )
@@ -77,40 +90,51 @@ struct ContentView: View {
                         trailing: NavigationLink(
                             destination: SettingsScreen(), label: {
                                 Image(systemName: "gear")
-                                    .foregroundColor(
-                                        colorScheme == .light ? .black : .white)
+                                    .foregroundColor(primartColor)
                             })
                         )
                 }
             }
         }
+        .accentColor(primartColor)
         .sheet(isPresented: $showFilter) {
             FilterView(viewmodel: viewModel)
         }
+        .environmentObject(viewModel)
     }
 }
 
 struct Fab: View {
     
     @Binding var showFilter: Bool
+    @Binding var searchOrTop: Bool
+    @Binding var reader: ScrollViewProxy?
     @Environment(\.colorScheme) var colorScheme
-
+    @EnvironmentObject var viewModel: ColorViewModel
+    
     var body: some View {
         Button(action: {
-            showFilter.toggle()
+            if searchOrTop {
+                showFilter.toggle()
+            } else {
+                let count = viewModel.filterColorList.count
+                if count == 0 {
+                    return
+                }
+                reader?.scrollTo(
+                    viewModel.filterColorList[0].name,
+                    anchor: .top
+                )
+            }
         }, label: {
-            Image(systemName: "magnifyingglass")
+            Image(systemName: searchOrTop ? "magnifyingglass" : "arrow.up")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)
                 .padding(20)
         })
         .foregroundColor(.white)
-        .background(
-            colorScheme == .light ?
-            Color(red: 140 / 255, green: 194 / 255, blue: 105 / 255)
-            : Color(red: 26 / 255, green: 104 / 255, blue: 64 / 255)
-        )
+        .background(Color("primaryColor"))
         .cornerRadius(35)
         .shadow(radius: 3, x: 3, y: 3)
         .transition(.scale)
