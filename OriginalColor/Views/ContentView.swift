@@ -48,16 +48,14 @@ struct ContentView: View {
                                 ColorItemView(color: color)
                             }
                         }
-                        // Hide Fab when scrolling
+                        // Show Search Or Top
                         .background(GeometryReader {
                             return Color.clear.preference(
                                 key: ViewOffsetKey.self,
                                 value: -$0.frame(in: .named("scroll")).origin.y)
                         })
                         .onPreferenceChange(ViewOffsetKey.self) { offset in
-                            withAnimation {
-                                searchOrTop = offset > 50 ? offset < scrollOffset : true
-                            }
+                            searchOrTop = offset > 50 ? offset < scrollOffset : true
                             scrollOffset = offset
                         }
                     }

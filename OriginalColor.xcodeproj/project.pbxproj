@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		890BE6952A67E01600B56DD2 /* ColorShareCardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */; };
+		8965B9D82A6A7F7B00F7BBF9 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965B9D72A6A7F7B00F7BBF9 /* SplashScreen.storyboard */; };
 		898337F72A55506100A815B7 /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898337F62A55506100A815B7 /* ReadData.swift */; };
 		89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5992A53E5E500C59108 /* ContentView.swift */; };
 		89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59B2A53E5E600C59108 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShareCardItem.swift; sourceTree = "<group>"; };
+		8965B9D72A6A7F7B00F7BBF9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		898337F62A55506100A815B7 /* ReadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadData.swift; sourceTree = "<group>"; };
 		89A2F5942A53E5E500C59108 /* OriginalColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OriginalColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A2F5992A53E5E500C59108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,7 @@
 		89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		89A4A9F72A57F49600BF6135 /* ColorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorItemView.swift; sourceTree = "<group>"; };
 		89A4A9F92A57FE2700BF6135 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		89A806422A6A7E7400CC963D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewModel.swift; sourceTree = "<group>"; };
 		89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailItem.swift; sourceTree = "<group>"; };
 		89CF40DC2A595E6200D5BC1D /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		89A2F5962A53E5E500C59108 /* OriginalColor */ = {
 			isa = PBXGroup;
 			children = (
+				89A806422A6A7E7400CC963D /* Info.plist */,
 				890BE6932A67DFC200B56DD2 /* Views */,
 				890BE6922A67DFA700B56DD2 /* Models */,
 				890BE6912A67DEFD00B56DD2 /* ViewModels */,
@@ -112,6 +116,7 @@
 				89A4A9F32A57F0E200BF6135 /* ColorUtils.swift */,
 				89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */,
 				89CF40DC2A595E6200D5BC1D /* colors.json */,
+				8965B9D72A6A7F7B00F7BBF9 /* SplashScreen.storyboard */,
 			);
 			path = OriginalColor;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */,
+				8965B9D82A6A7F7B00F7BBF9 /* SplashScreen.storyboard in Resources */,
 				89CF40DD2A595E6200D5BC1D /* colors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,12 +337,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"OriginalColor/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OriginalColor/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -349,7 +357,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wzl.originalcolor.OriginalColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -367,12 +377,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"OriginalColor/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OriginalColor/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -385,7 +397,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wzl.originalcolor.OriginalColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

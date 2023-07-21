@@ -62,7 +62,7 @@ struct SettingsScreen: View {
                         .listRowBackground(
                             Color(UIColor.systemGroupedBackground))
                 }
-                Text("App Developed by 禄眠")
+                Text("Developed by 禄眠")
                     .foregroundColor(Color("primaryColor"))
                     .font(.headline)
                     .fontWeight(.bold)
