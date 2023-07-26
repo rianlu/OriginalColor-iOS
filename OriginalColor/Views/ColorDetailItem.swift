@@ -18,8 +18,7 @@ struct ColorDetailItem: View {
 
     var body: some View {
         ZStack {
-            (colorScheme == .light ? color.getRGBColor().opacity(0.5) : color.getRGBColor().opacity(0.75)
-                )
+            color.getRGBColor().opacity(0.5)
             .ignoresSafeArea()
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
@@ -50,7 +49,6 @@ struct ColorDetailItem: View {
     }
     
     @MainActor func render(color: OriginalColor) {
-//        let renderer = ImageRenderer(content: RenderView(text: "哈哈哈哈"))
         let renderer = ImageRenderer(content: ColorShareCardItem(color: color))
 
         if let uiImage = renderer.uiImage {
@@ -70,7 +68,8 @@ struct IPadColorDetailItem: View {
             (colorScheme == .light ? color.getRGBColor().opacity(0.5) : color.getRGBColor().opacity(0.75)
             )
             .ignoresSafeArea()
-            GeometryReader { geometry in                VStack(alignment: .leading) {
+            GeometryReader { geometry in
+                VStack(alignment: .leading) {
                     HStack {
                         Spacer()
                         ShareLink("",
@@ -107,15 +106,6 @@ struct IPadColorDetailItem: View {
                 .presentationDetents([.height(300)])
             .presentationDragIndicator(.visible)
             }
-        }
-    }
-}
-
-struct TrailingIconLabelStyle: LabelStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            configuration.title
-            configuration.icon
         }
     }
 }
