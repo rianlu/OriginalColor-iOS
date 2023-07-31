@@ -43,7 +43,7 @@ struct SettingsScreen: View {
                             .padding(.leading, 6)
                         }
                         // TODO: Click Func
-                        Text("⭐️给应用评分⭐️")
+//                        Text("⭐️给应用评分⭐️")
                     }
                     HStack {
                         Spacer()

@@ -72,7 +72,7 @@ struct IPadColorDetailItem: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Spacer()
-                        ShareLink("",
+                        ShareLink("",			
                           item: renderedImage,
                           preview: SharePreview(color.name, image: renderedImage))
                         .foregroundColor(colorScheme == .light ? .black : .white)
