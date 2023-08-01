@@ -14,8 +14,7 @@ struct ContentView: View {
     @State var searchOrTop: Bool = false
     @State var scrollOffset: CGFloat = 0.00
     @State var showFilter: Bool = false
-    @AppStorage("vibration：") var vibration: Bool = false
-    let generator = UINotificationFeedbackGenerator()
+    @AppStorage("vibration：") var vibration: Bool = true
     @AppStorage("fabColor") var fabColor: String = ""
     let primartColor = Color("primaryColor")
     
@@ -41,6 +40,12 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                if viewModel.filterColorList.count == 0 {
+                    VStack {
+                        Image("no_list_data")
+                        Text("抱歉，没有找到～")
+                    }
+                }
                 ScrollViewReader { reader in
                     ScrollView {
                         LazyVGrid(columns: columns) {
@@ -78,7 +83,7 @@ struct ContentView: View {
                                     return
                                 }
                                 if vibration {
-                                    generator.notificationOccurred(.success)
+                                    HapticManager.instance.impact(style: .soft)
                                 }
                                 reader.scrollTo(
                                     viewModel.filterColorList[Int.random(in: 0..<count)].name,

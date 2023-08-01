@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		890BE6952A67E01600B56DD2 /* ColorShareCardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */; };
+		894978E92A78F83800BEAC77 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894978E82A78F83800BEAC77 /* HapticManager.swift */; };
 		898337F72A55506100A815B7 /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898337F62A55506100A815B7 /* ReadData.swift */; };
 		89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5992A53E5E500C59108 /* ContentView.swift */; };
 		89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59B2A53E5E600C59108 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShareCardItem.swift; sourceTree = "<group>"; };
+		894978E82A78F83800BEAC77 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		898337F62A55506100A815B7 /* ReadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadData.swift; sourceTree = "<group>"; };
 		89A2F5942A53E5E500C59108 /* OriginalColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OriginalColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A2F5992A53E5E500C59108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		890BE6932A67DFC200B56DD2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */,
 				89A4A9F72A57F49600BF6135 /* ColorItemView.swift */,
 				89A4A9F92A57FE2700BF6135 /* FilterView.swift */,
 				89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */,
@@ -115,8 +118,8 @@
 				89A2F59D2A53E5E600C59108 /* OriginalColor.entitlements */,
 				89A2F59E2A53E5E600C59108 /* Preview Content */,
 				89A4A9F32A57F0E200BF6135 /* ColorUtils.swift */,
-				89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */,
 				89CF40DC2A595E6200D5BC1D /* colors.json */,
+				894978E82A78F83800BEAC77 /* HapticManager.swift */,
 			);
 			path = OriginalColor;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				894978E92A78F83800BEAC77 /* HapticManager.swift in Sources */,
 				89A4A9FA2A57FE2700BF6135 /* FilterView.swift in Sources */,
 				89B5563D2A5AA51200F1780C /* ColorDetailItem.swift in Sources */,
 				89A2F5A72A53FBA300C59108 /* OriginalColor.swift in Sources */,
