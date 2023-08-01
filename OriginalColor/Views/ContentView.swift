@@ -42,7 +42,7 @@ struct ContentView: View {
             ZStack {
                 if viewModel.filterColorList.count == 0 {
                     VStack {
-                        Image("no_list_data")
+                        Image("empty_list_placeholder")
                         Text("抱歉，没有找到～")
                     }
                 }
