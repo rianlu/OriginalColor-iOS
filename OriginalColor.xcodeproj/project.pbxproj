@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		890BE6952A67E01600B56DD2 /* ColorShareCardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */; };
 		894978E92A78F83800BEAC77 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894978E82A78F83800BEAC77 /* HapticManager.swift */; };
+		8982F4512AAC62FD00FA2718 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */; };
 		898337F72A55506100A815B7 /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898337F62A55506100A815B7 /* ReadData.swift */; };
 		89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5992A53E5E500C59108 /* ContentView.swift */; };
 		89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59B2A53E5E600C59108 /* Assets.xcassets */; };
@@ -21,13 +22,16 @@
 		89B5563B2A5A7F4500F1780C /* ColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */; };
 		89B5563D2A5AA51200F1780C /* ColorDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */; };
 		89CF40DD2A595E6200D5BC1D /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CF40DC2A595E6200D5BC1D /* colors.json */; };
-		89D04FE62A77AAB900E132DD /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89D04FE52A77AAB900E132DD /* SplashScreen.storyboard */; };
+		89D0F9292AAC083200E6FA08 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89D0F92B2AAC083200E6FA08 /* Localizable.strings */; };
 		89D94FD42A5D3C9D004E818B /* CopyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D94FD32A5D3C9D004E818B /* CopyListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShareCardItem.swift; sourceTree = "<group>"; };
 		894978E82A78F83800BEAC77 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		8982F4522AAC62FD00FA2718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SplashScreen.storyboard; sourceTree = "<group>"; };
+		8982F4552AAC630000FA2718 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SplashScreen.strings"; sourceTree = "<group>"; };
+		8982F4572AAC630000FA2718 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SplashScreen.strings; sourceTree = "<group>"; };
 		898337F62A55506100A815B7 /* ReadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadData.swift; sourceTree = "<group>"; };
 		89A2F5942A53E5E500C59108 /* OriginalColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OriginalColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A2F5992A53E5E500C59108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,7 +47,8 @@
 		89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewModel.swift; sourceTree = "<group>"; };
 		89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailItem.swift; sourceTree = "<group>"; };
 		89CF40DC2A595E6200D5BC1D /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
-		89D04FE52A77AAB900E132DD /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
+		89D0F92A2AAC083200E6FA08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		89D0F92C2AAC083B00E6FA08 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		89D94FD32A5D3C9D004E818B /* CopyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +96,8 @@
 		89A2F58B2A53E5E500C59108 = {
 			isa = PBXGroup;
 			children = (
-				89D04FE52A77AAB900E132DD /* SplashScreen.storyboard */,
+				89D0F92B2AAC083200E6FA08 /* Localizable.strings */,
+				8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */,
 				89A2F5962A53E5E500C59108 /* OriginalColor */,
 				89A2F5952A53E5E500C59108 /* Products */,
 			);
@@ -173,6 +179,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 89A2F58B2A53E5E500C59108;
 			productRefGroup = 89A2F5952A53E5E500C59108 /* Products */;
@@ -190,7 +197,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */,
-				89D04FE62A77AAB900E132DD /* SplashScreen.storyboard in Resources */,
+				89D0F9292AAC083200E6FA08 /* Localizable.strings in Resources */,
+				8982F4512AAC62FD00FA2718 /* SplashScreen.storyboard in Resources */,
 				89CF40DD2A595E6200D5BC1D /* colors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +227,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8982F4522AAC62FD00FA2718 /* Base */,
+				8982F4552AAC630000FA2718 /* zh-Hans */,
+				8982F4572AAC630000FA2718 /* en */,
+			);
+			name = SplashScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		89D0F92B2AAC083200E6FA08 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89D0F92A2AAC083200E6FA08 /* en */,
+				89D0F92C2AAC083B00E6FA08 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		89A2F5A12A53E5E600C59108 /* Debug */ = {
@@ -349,6 +379,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen.storyboard;
@@ -393,6 +424,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen.storyboard;

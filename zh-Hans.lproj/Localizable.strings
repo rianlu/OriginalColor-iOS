@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  OriginalColor
+
+  Created by lu on 2023/9/9.
+  
+*/
+
+"CFBundleDisplayName" = "原色";
+
+// Settings
+"About" = "关于";
+"Version" = "版本";
+"Vibration" = "震动";
+"UnknownVersion" = "未知版本";
+
+"EmptyListHint" = "抱歉，没有找到～";

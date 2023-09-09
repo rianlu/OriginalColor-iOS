@@ -43,7 +43,8 @@ struct ContentView: View {
                 if viewModel.filterColorList.count == 0 {
                     VStack {
                         Image("empty_list_placeholder")
-                        Text("抱歉，没有找到～")
+                        Text("EmptyListHint")
+                            .foregroundColor(Color("primaryColor"))
                     }
                 }
                 ScrollViewReader { reader in
@@ -73,7 +74,7 @@ struct ContentView: View {
                         )
                     }
                     .padding(.horizontal)
-                    .navigationTitle("原色")
+                    .navigationTitle("CFBundleDisplayName")
                     .navigationBarItems(
                         leading: Image("random.cube")
                             .foregroundColor(primartColor)
@@ -139,7 +140,6 @@ struct Fab: View {
         .foregroundColor(.white)
         .background(Color("primaryColor"))
         .cornerRadius(35)
-        .shadow(radius: 3, x: 3, y: 3)
         .transition(.scale)
     }
 }
@@ -155,5 +155,7 @@ struct ViewOffsetKey: PreferenceKey {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+                    .environment(\.locale, .init(identifier: "zh-Hans"))
+//                        .environment(\.locale, .init(identifier: "en"))
     }
 }

@@ -12,7 +12,7 @@ struct SettingsScreen: View {
     @AppStorage("vibration") var vibration: Bool = true
     @Environment(\.colorScheme) var colorScheme
     let primartColor = Color("primaryColor")
-    let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "获取失败"
+    let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? NSLocalizedString("UnknownVersion", comment: "")
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(primartColor)]
@@ -23,24 +23,22 @@ struct SettingsScreen: View {
         ZStack {
             Color(UIColor.systemGroupedBackground)
                 .ignoresSafeArea()
-            .navigationTitle("关于")
+            .navigationTitle("About")
             .navigationBarTitleDisplayMode(.inline)
             VStack {
                 Form {
                     Section("") {
                         HStack {
-                            Text("版本")
+                            Text("Version")
                             Spacer()
                             Text(appVersion)
                                 .opacity(0.5)
                         }
                         HStack {
-//                            Image(systemName: "iphone.radiowaves.left.and.right")
                             Toggle(isOn: $vibration) {
-                                Text("震动")
+                                Text("Vibration")
                             }
                             .tint(Color("primaryColor"))
-                            .padding(.leading, 6)
                         }
                         // TODO: Click Func
 //                        Text("⭐️给应用评分⭐️")
@@ -90,6 +88,8 @@ struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             SettingsScreen()
+                .environment(\.locale, .init(identifier: "zh-Hans"))
+//                .environment(\.locale, .init(identifier: "en"))
         }
     }
 }

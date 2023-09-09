@@ -11,16 +11,15 @@ struct FilterView: View {
     
     @ObservedObject var viewmodel: ColorViewModel
     @State private var searchText = ""
-    var colorStringList: [String] = ["全部", "白", "灰", "红", "橙", "黄", "绿","青", "蓝", "紫", "其他"]
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(colorStringList, id: \.self) { item in
+                ForEach(viewmodel.colorStringList, id: \.self) { item in
                     HStack {
-                        Text(item)
+                        Text(NSLocalizedString(item, comment: ""))
                         Spacer()
                         if item == viewmodel.filter {
                             Image(systemName: "checkmark")
@@ -29,7 +28,6 @@ struct FilterView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        viewmodel.filter = item
                         viewmodel.filterColorList(filter: item)
                         presentationMode.wrappedValue.dismiss()
                     }
@@ -47,5 +45,7 @@ struct FilterView: View {
 struct SearchFilterView_Previews: PreviewProvider {
     static var previews: some View {
         FilterView(viewmodel: ColorViewModel())
+            .environment(\.locale, .init(identifier: "zh-Hans"))
+                .environment(\.locale, .init(identifier: "en"))
     }
 }

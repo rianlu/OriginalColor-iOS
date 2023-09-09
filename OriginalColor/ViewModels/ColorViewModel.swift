@@ -11,7 +11,8 @@ class ColorViewModel: ObservableObject {
     
     private var colorList: [OriginalColor] = []
     @Published var filterColorList: [OriginalColor] = []
-    var colorStringList: [String] = ["全部", "白", "灰", "红", "橙", "黄", "绿","青", "蓝", "紫", "其他"]
+    @Published var colorStringList: [String] =
+        ["全部", "白", "灰", "红", "橙", "黄", "绿","青", "蓝", "紫", "其他"]
     @Published var filter: String = "全部"
     
     init() {
@@ -32,6 +33,7 @@ class ColorViewModel: ObservableObject {
         if filter == "" {
             return
         }
+        self.filter = filter
         if filter == "全部" {
             filterColorList = colorList
         } else if filter != "其他" {
