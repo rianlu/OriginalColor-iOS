@@ -17,30 +17,26 @@ struct ColorItemView: View {
 
     var body: some View {
         let cornerRadius = 16.0
+        let cardColor = color.getRGBColor()
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(
                     LinearGradient(gradient: Gradient(stops: [
-                        .init(color: color.getRGBColor()
-                            .opacity(colorScheme == .light ? 0.7 : 1), location: 0.3),
-                        .init(color: color.getRGBColor(), location: 1)
+                        .init(color: colorScheme == .light ? cardColor.opacity(0.7) : cardColor.adjust(brightness: 0.2), location: 0.3),
+                        .init(color: cardColor, location: 1)
                     ]), startPoint: .top, endPoint: .bottom)
                 )
             VStack(alignment: .leading) {
                 Text(color.pinyin.uppercased())
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .foregroundColor(color.getRGBColor()).opacity(0.6)
-                    .brightness(color.getRGBColor().isLight() ? -0.3 :
-                        (colorScheme == .light ? 0 : 0.3)
-                    )
+                    .foregroundColor(cardColor).opacity(0.6)
+                    .brightness(cardColor.isLight() ? -0.3 : -0.1)
                 Text(color.name)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(color.getRGBColor())
-                    .brightness(color.getRGBColor().isLight() ? -0.3 :
-                        (colorScheme == .light ? 0 : 0.3)
-                    )
+                    .foregroundColor(cardColor)
+                    .brightness(cardColor.isLight() ? -0.3 : -0.1)
                     .padding(.top, 2)
             }
             .padding()
