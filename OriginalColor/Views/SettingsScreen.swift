@@ -9,22 +9,26 @@ import SwiftUI
 
 struct SettingsScreen: View {
     
+    @State var localThemeColor: Color
     @AppStorage("vibration") var vibration: Bool = true
     @Environment(\.colorScheme) var colorScheme
-    let primartColor = Color("primaryColor")
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? NSLocalizedString("UnknownVersion", comment: "")
     
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(primartColor)]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(primartColor)]
-    }
+//    init() {
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(localThemeColor)]
+//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(localThemeColor)]
+//    }
     
     var body: some View {
         ZStack {
             Color(UIColor.systemGroupedBackground)
                 .ignoresSafeArea()
-            .navigationTitle("About")
-            .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text("About")
+                            .foregroundColor(localThemeColor)
+                    }
+                }
             VStack {
                 Form {
                     Section("") {
@@ -38,7 +42,7 @@ struct SettingsScreen: View {
                             Toggle(isOn: $vibration) {
                                 Text("Vibration")
                             }
-                            .tint(Color("primaryColor"))
+                            .tint(localThemeColor)
                         }
                         // TODO: Click Func
 //                        Text("⭐️给应用评分⭐️")
@@ -61,7 +65,7 @@ struct SettingsScreen: View {
                             Color(UIColor.systemGroupedBackground))
                 }
                 Text("Developed by 禄眠")
-                    .foregroundColor(Color("primaryColor"))
+                    .foregroundColor(localThemeColor)
                     .font(.headline)
                     .fontWeight(.bold)
                     .opacity(0.8)
@@ -87,7 +91,7 @@ private func goToAppStore() {
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            SettingsScreen()
+            SettingsScreen(localThemeColor: Color("primaryColor"))
                 .environment(\.locale, .init(identifier: "zh-Hans"))
 //                .environment(\.locale, .init(identifier: "en"))
         }

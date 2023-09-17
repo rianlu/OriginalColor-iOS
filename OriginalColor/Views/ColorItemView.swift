@@ -14,7 +14,8 @@ struct ColorItemView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
     @State var isSHowDetails: Bool = false
-
+    @AppStorage("themeColor") var themeColor: String = ""
+    
     var body: some View {
         let cornerRadius = 16.0
         let cardColor = color.getRGBColor()
@@ -46,6 +47,12 @@ struct ColorItemView: View {
         .onTapGesture {
             isSHowDetails.toggle()
         }
+        .onLongPressGesture {
+            themeColor = color.hex
+            let uiColor = UIColor(Color(hex: themeColor))
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
+        }
         .sheet(isPresented: $isSHowDetails, content: {
             switch horizontalSizeClass {
             case .regular:
@@ -61,6 +68,7 @@ struct ColorItemView: View {
 }
 
 struct ColorItemView_Previews: PreviewProvider {
+    @State static var changeThemeColor = false
     static var previews: some View {
         ColorItemView(color: OriginalColor(RGB: [222, 28, 49], name: "唐菖蒲红", pinyin: "tangchangpuhong"))
     }

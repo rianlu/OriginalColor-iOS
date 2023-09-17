@@ -26,8 +26,8 @@ struct ColorDetailItem: View {
                     HStack {
                         Text(color.name)
                             .font(.title)
-                            .foregroundColor(color.getRGBColor()).opacity(0.6)
-                            .brightness(colorScheme == .light ? -0.1 : 0.3)
+                            .foregroundColor(color.getRGBColor()).opacity(0.9)
+                            .brightness(colorScheme == .light ? -0.1 : 0.1)
                         Spacer()
                         ShareLink("",
                           item: renderedImage,
@@ -83,11 +83,11 @@ struct IPadColorDetailItem: View {
                         .foregroundColor(color.getRGBColor().opacity(0.3))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .brightness(colorScheme == .light ? -0.1 : 0.3)
+                        .brightness(colorScheme == .light ? -0.1 : 0.1)
                     Text(color.name)
                         .foregroundColor(color.getRGBColor().opacity(0.9))
                         .font(.system(size: 70, weight: .bold, design: .rounded))
-                        .brightness(colorScheme == .light ? -0.1 : 0.3)
+                        .brightness(colorScheme == .light ? -0.1 : 0.1)
                     HStack {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(color.getRGBColor())

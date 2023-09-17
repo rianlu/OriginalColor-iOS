@@ -11,24 +11,27 @@ struct ContentView: View {
     
     @StateObject var viewModel: ColorViewModel = ColorViewModel()
     @Environment(\.colorScheme) var colorScheme
-    @State var searchOrTop: Bool = false
+    @Environment (\.horizontalSizeClass) var horizontalSizeClass
+
+    @State var searchOrTop: Bool = true
     @State var scrollOffset: CGFloat = 0.00
     @State var showFilter: Bool = false
     @AppStorage("vibration：") var vibration: Bool = true
-    @AppStorage("fabColor") var fabColor: String = ""
     let primartColor = Color("primaryColor")
+    // 随机按钮旋转动画（角度）
+    @State var randomAngle = 0.0
+    @State var isPad = false
     
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(primartColor)]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(primartColor)]
-    }
-    
-    @Environment (\.horizontalSizeClass) var horizontalSizeClass
+    @AppStorage("themeColor") var themeColor: String = ""
+    // 用于重新创建标题栏
+    @State private var force = UUID()
+
     var columns: [GridItem] {
         switch horizontalSizeClass {
         case .compact:
             return [GridItem()]
         case .regular:
+            isPad = true
             return [GridItem(), GridItem()]
         default:
             return [GridItem()]
@@ -37,6 +40,12 @@ struct ContentView: View {
     
     @State private var reader: ScrollViewProxy?
     
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color(hex: themeColor))]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color(hex: themeColor))]
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -44,7 +53,7 @@ struct ContentView: View {
                     VStack {
                         Image("empty_list_placeholder")
                         Text("EmptyListHint")
-                            .foregroundColor(Color("primaryColor"))
+                            .foregroundColor(Color(hex: themeColor))
                     }
                 }
                 ScrollViewReader { reader in
@@ -54,57 +63,83 @@ struct ContentView: View {
                                 ColorItemView(color: color)
                             }
                         }
-                        // Show Search Or Top
-                        .background(GeometryReader {
-                            return Color.clear.preference(
-                                key: ViewOffsetKey.self,
-                                value: -$0.frame(in: .named("scroll")).origin.y)
-                        })
-                        .onPreferenceChange(ViewOffsetKey.self) { offset in
-                            searchOrTop = offset > 50 ? offset < scrollOffset : true
-                            scrollOffset = offset
-                        }
+//                        .background(GeometryReader {
+//                            return Color.clear.preference(
+//                                key: ViewOffsetKey.self,
+//                                value: -$0.frame(in: .named("scroll")).origin.y)
+//                        })
+                        .coordinateSpace(name: "scroll")
+                        .onPreferenceChange(ViewOffsetKey.self) { value in
+                             print("offset: %d", value)
+                         }
+//                        .onPreferenceChange(ViewOffsetKey.self) { offset in
+//                            searchOrTop = offset > 50 ? offset < scrollOffset : true
+//                            scrollOffset = offset
+//                            print(searchOrTop)
+//                        }
                     }
                     .onAppear {
                         self.reader = reader
                     }
-                    .safeAreaInset(edge: .bottom, alignment: .trailing) {
-                        Fab(
-                            showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
-                        )
-                    }
-                    .padding(.horizontal)
-                    .navigationTitle("CFBundleDisplayName")
-                    .navigationBarItems(
-                        leading: Image("random.cube")
-                            .foregroundColor(primartColor)
-                            .onTapGesture {
-                                let count = viewModel.filterColorList.count
-                                if count == 0 {
-                                    return
-                                }
-                                if vibration {
-                                    HapticManager.instance.impact(style: .soft)
-                                }
-                                reader.scrollTo(
-                                    viewModel.filterColorList[Int.random(in: 0..<count)].name,
-                                    anchor: .top
-                                )
-                            },
-                        trailing: NavigationLink(
-                            destination: SettingsScreen(), label: {
-                                Image(systemName: "gear")
-                                    .foregroundColor(primartColor)
-                            })
-                        )
                 }
             }
+            .safeAreaInset(edge: .bottom, alignment: .trailing) {
+                Fab(
+                    showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
+                )
+            }
+            .padding(.horizontal)
+            .navigationTitle("CFBundleDisplayName")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    navigationLeadingVIew
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(
+                        destination: SettingsScreen(localThemeColor: Color(hex: themeColor)), label: {
+                            Image(systemName: "gear")
+                        })
+                }
+            }
+//            .navigationBarItems(
+//                leading: navigationLeadingVIew,
+//                trailing: NavigationLink(
+//                    destination: SettingsScreen(localThemeColor: Color(hex: themeColor)), label: {
+//                        Image(systemName: "gear")
+//                    })
+//                )
         }
-        .accentColor(primartColor)
-        .sheet(isPresented: $showFilter) {
-            FilterView(viewmodel: viewModel)
-        }
+        .accentColor(Color(hex: themeColor))
+        .sheet(isPresented: $showFilter) {FilterView(viewmodel: viewModel)}
         .environmentObject(viewModel)
+        .transition(AnyTransition.opacity.combined(with: .slide))
+        .id(themeColor)
+    }
+    
+    var navigationLeadingVIew: some View {
+        Image("random.cube")
+            .foregroundColor(Color(hex: themeColor))
+            .rotationEffect(.degrees(randomAngle))
+            .animation(.spring(), value: randomAngle)
+            .onTapGesture {
+                let count = viewModel.filterColorList.count
+                if count == 0 {
+                    return
+                }
+                let randomPosition = Int.random(in: 0..<count)
+                if randomPosition == 0 || (randomPosition == 1 && isPad) {
+                    return
+                }
+                if vibration {
+                    HapticManager.instance.impact(style: .soft)
+                }
+                randomAngle += 360.0
+                reader?.scrollTo(
+                    viewModel.filterColorList[randomPosition].name,
+                    anchor: .top
+                )
+                searchOrTop = false
+            }
     }
 }
 
@@ -115,7 +150,8 @@ struct Fab: View {
     @Binding var reader: ScrollViewProxy?
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: ColorViewModel
-    
+    @AppStorage("themeColor") var themeColor: String = ""
+
     var body: some View {
         Button(action: {
             if searchOrTop {
@@ -129,6 +165,7 @@ struct Fab: View {
                     viewModel.filterColorList[0].name,
                     anchor: .top
                 )
+                searchOrTop = true
             }
         }, label: {
             Image(systemName: searchOrTop ? "magnifyingglass" : "arrow.up")
@@ -138,9 +175,11 @@ struct Fab: View {
                 .padding(20)
         })
         .foregroundColor(.white)
-        .background(Color("primaryColor"))
+        .background(Color(hex: themeColor))
         .cornerRadius(35)
         .transition(.scale)
+        .scaleEffect(showFilter ? 0 : 1)
+        .animation(.linear(duration: 0.1), value: showFilter)
     }
 }
 
