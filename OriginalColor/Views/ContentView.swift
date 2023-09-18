@@ -13,16 +13,18 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
 
+    // FAB
     @State var searchOrTop: Bool = true
-    @State var scrollOffset: CGFloat = 0.00
+    // 搜索&筛选
     @State var showFilter: Bool = false
+    // 震动反馈
     @AppStorage("vibration：") var vibration: Bool = true
-    let primartColor = Color("primaryColor")
     // 随机按钮旋转动画（角度）
     @State var randomAngle = 0.0
+    // 屏幕尺寸
     @State var isPad = false
-    
-    @AppStorage("themeColor") var themeColor: String = ""
+    // 本地存储颜色
+    @AppStorage("themeColor") var themeColor: String = "f86b1d"
     // 用于重新创建标题栏
     @State private var force = UUID()
 
@@ -63,20 +65,10 @@ struct ContentView: View {
                                 ColorItemView(color: color)
                             }
                         }
-//                        .background(GeometryReader {
-//                            return Color.clear.preference(
-//                                key: ViewOffsetKey.self,
-//                                value: -$0.frame(in: .named("scroll")).origin.y)
-//                        })
                         .coordinateSpace(name: "scroll")
                         .onPreferenceChange(ViewOffsetKey.self) { value in
                              print("offset: %d", value)
                          }
-//                        .onPreferenceChange(ViewOffsetKey.self) { offset in
-//                            searchOrTop = offset > 50 ? offset < scrollOffset : true
-//                            scrollOffset = offset
-//                            print(searchOrTop)
-//                        }
                     }
                     .onAppear {
                         self.reader = reader
@@ -101,13 +93,6 @@ struct ContentView: View {
                         })
                 }
             }
-//            .navigationBarItems(
-//                leading: navigationLeadingVIew,
-//                trailing: NavigationLink(
-//                    destination: SettingsScreen(localThemeColor: Color(hex: themeColor)), label: {
-//                        Image(systemName: "gear")
-//                    })
-//                )
         }
         .accentColor(Color(hex: themeColor))
         .sheet(isPresented: $showFilter) {FilterView(viewmodel: viewModel)}
@@ -150,9 +135,10 @@ struct Fab: View {
     @Binding var reader: ScrollViewProxy?
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: ColorViewModel
-    @AppStorage("themeColor") var themeColor: String = ""
+    @AppStorage("themeColor") var themeColor: String = "f86b1d"
 
     var body: some View {
+        let localThemeCOlor = Color(hex: themeColor)
         Button(action: {
             if searchOrTop {
                 showFilter.toggle()
@@ -173,13 +159,14 @@ struct Fab: View {
                 .scaledToFit()
                 .frame(width: 20, height: 20)
                 .padding(20)
+                .foregroundColor(localThemeCOlor.isLight() ? localThemeCOlor.adjust(brightness: -0.5) : localThemeCOlor.adjust(brightness: 0.5))
         })
         .foregroundColor(.white)
-        .background(Color(hex: themeColor))
+        .background(localThemeCOlor)
         .cornerRadius(35)
         .transition(.scale)
         .scaleEffect(showFilter ? 0 : 1)
-        .animation(.linear(duration: 0.1), value: showFilter)
+        .animation(.spring(), value: showFilter)
     }
 }
 

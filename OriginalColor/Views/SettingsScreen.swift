@@ -14,68 +14,73 @@ struct SettingsScreen: View {
     @Environment(\.colorScheme) var colorScheme
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? NSLocalizedString("UnknownVersion", comment: "")
     
-//    init() {
-//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(localThemeColor)]
-//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(localThemeColor)]
-//    }
-    
     var body: some View {
-        ZStack {
-            Color(UIColor.systemGroupedBackground)
-                .ignoresSafeArea()
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text("About")
-                            .foregroundColor(localThemeColor)
+        NavigationStack {
+            ZStack {
+                Color(UIColor.systemGroupedBackground)
+                    .ignoresSafeArea()
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text("About")
+                                .foregroundColor(localThemeColor)
+                        }
                     }
-                }
-            VStack {
-                Form {
-                    Section("") {
+                VStack {
+                    Form {
+                        Section("") {
+                            HStack {
+                                Text("Version")
+                                Spacer()
+                                Text(appVersion)
+                                    .opacity(0.5)
+                            }
+                            HStack {
+                                Toggle(isOn: $vibration) {
+                                    Text("Vibration")
+                                }
+                                .tint(localThemeColor)
+                            }
+                            HStack {
+                                Text("RateApp")
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                print("Click")
+                                goToAppStore()
+                            }
+                        }
                         HStack {
-                            Text("Version")
                             Spacer()
-                            Text(appVersion)
-                                .opacity(0.5)
+                            VStack(alignment: .center, content: {
+                                Group {
+                                    Text(.init("Copyright © 2013 by [Perchouli](http://dmyz.org/) Shanzhai to [Nipponcolors](http://nipponcolors.com/)"))
+                                        .multilineTextAlignment(.center)
+                                    Text("参看: 色谱 中科院科技情报编委会名词室.科学出版社,1957. Adobe RGB / CMYK FOGRA39, Dot Gain 15%")
+                                        .multilineTextAlignment(.center)
+                                }
+                                .foregroundColor(.gray)
+                                .font(.subheadline)
+                            })
+                            Spacer()
                         }
-                        HStack {
-                            Toggle(isOn: $vibration) {
-                                Text("Vibration")
-                            }
-                            .tint(localThemeColor)
-                        }
-                        // TODO: Click Func
-//                        Text("⭐️给应用评分⭐️")
+                            .listRowBackground(
+                                Color(UIColor.systemGroupedBackground))
                     }
-                    HStack {
-                        Spacer()
-                        VStack(alignment: .center, content: {
-                            Group {
-                                Text(.init("Copyright © 2013 by [Perchouli](http://dmyz.org/) Shanzhai to [Nipponcolors](http://nipponcolors.com/)"))
-                                    .multilineTextAlignment(.center)
-                                Text("参看: 色谱 中科院科技情报编委会名词室.科学出版社,1957. Adobe RGB / CMYK FOGRA39, Dot Gain 15%")
-                                    .multilineTextAlignment(.center)
-                            }
-                            .foregroundColor(.gray)
-                            .font(.subheadline)
-                        })
-                        Spacer()
-                    }
-                        .listRowBackground(
-                            Color(UIColor.systemGroupedBackground))
+                    Text("Developed by 禄眠")
+                        .foregroundColor(localThemeColor)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .opacity(0.8)
                 }
-                Text("Developed by 禄眠")
-                    .foregroundColor(localThemeColor)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .opacity(0.8)
             }
         }
     }
 }
 
 private func goToAppStore() {
-    let urlString = "应用商店的APPID"
+    let urlString = "https://apps.apple.com/cn/app/%E5%8E%9F%E8%89%B2-%E9%A2%9C%E8%89%B2%E6%9F%A5%E8%AF%A2/id6465685086"
     if let url = URL(string: urlString) {
         if #available(iOS 10, *) {
             UIApplication.shared.open(url, options: [:],
