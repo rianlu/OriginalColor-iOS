@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsScreen: View {
     
-    @State var localThemeColor: Color
+    @State var themeColor: Color
     @AppStorage("vibration") var vibration: Bool = true
     @Environment(\.colorScheme) var colorScheme
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? NSLocalizedString("UnknownVersion", comment: "")
@@ -23,7 +23,7 @@ struct SettingsScreen: View {
                     .toolbar {
                         ToolbarItem(placement: .principal) {
                             Text("About")
-                                .foregroundColor(localThemeColor)
+                                .foregroundColor(themeColor)
                         }
                     }
                 VStack {
@@ -39,7 +39,7 @@ struct SettingsScreen: View {
                                 Toggle(isOn: $vibration) {
                                     Text("Vibration")
                                 }
-                                .tint(localThemeColor)
+                                .tint(themeColor)
                             }
                             HStack {
                                 Text("RateApp")
@@ -69,7 +69,7 @@ struct SettingsScreen: View {
                                 Color(UIColor.systemGroupedBackground))
                     }
                     Text("Developed by 禄眠")
-                        .foregroundColor(localThemeColor)
+                        .foregroundColor(themeColor)
                         .font(.headline)
                         .fontWeight(.bold)
                         .opacity(0.8)
@@ -96,7 +96,7 @@ private func goToAppStore() {
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            SettingsScreen(localThemeColor: Color("primaryColor"))
+            SettingsScreen(themeColor: Color("primaryColor"))
                 .environment(\.locale, .init(identifier: "zh-Hans"))
 //                .environment(\.locale, .init(identifier: "en"))
         }

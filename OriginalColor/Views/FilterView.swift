@@ -23,7 +23,7 @@ struct FilterView: View {
                         Spacer()
                         if item == viewmodel.filter {
                             Image(systemName: "checkmark")
-                                .foregroundColor(Color("primaryColor"))
+                                .foregroundColor(viewmodel.themeColor)
                         }
                     }
                     .contentShape(Rectangle())

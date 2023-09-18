@@ -23,8 +23,7 @@ struct ContentView: View {
     @State var randomAngle = 0.0
     // 屏幕尺寸
     @State var isPad = false
-    // 本地存储颜色
-    @AppStorage("themeColor") var themeColor: String = "f86b1d"
+
     // 用于重新创建标题栏
     @State private var force = UUID()
 
@@ -42,20 +41,15 @@ struct ContentView: View {
     
     @State private var reader: ScrollViewProxy?
     
-    
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color(hex: themeColor))]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color(hex: themeColor))]
-    }
-    
     var body: some View {
+        let themeColor = viewModel.themeColor
         NavigationStack {
             ZStack {
                 if viewModel.filterColorList.count == 0 {
                     VStack {
                         Image("empty_list_placeholder")
                         Text("EmptyListHint")
-                            .foregroundColor(Color(hex: themeColor))
+                            .foregroundColor(themeColor)
                     }
                 }
                 ScrollViewReader { reader in
@@ -63,6 +57,12 @@ struct ContentView: View {
                         LazyVGrid(columns: columns) {
                             ForEach(viewModel.filterColorList, id: \.name) { color in
                                 ColorItemView(color: color)
+                                    .onLongPressGesture {
+                                        viewModel.updateThemeColor(hex: color.hex)
+                                        let uiColor = UIColor(themeColor)
+                                        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
+                                        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
+                                    }
                             }
                         }
                         .coordinateSpace(name: "scroll")
@@ -88,22 +88,27 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(
-                        destination: SettingsScreen(localThemeColor: Color(hex: themeColor)), label: {
+                        destination: SettingsScreen(themeColor: themeColor), label: {
                             Image(systemName: "gear")
                         })
                 }
             }
         }
-        .accentColor(Color(hex: themeColor))
+        .accentColor(themeColor)
         .sheet(isPresented: $showFilter) {FilterView(viewmodel: viewModel)}
         .environmentObject(viewModel)
         .transition(AnyTransition.opacity.combined(with: .slide))
+        .onAppear {
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(themeColor)]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(themeColor)]
+        }
         .id(themeColor)
     }
     
     var navigationLeadingVIew: some View {
-        Image("random.cube")
-            .foregroundColor(Color(hex: themeColor))
+        let themeColor = viewModel.themeColor
+        return Image("random.cube")
+            .foregroundColor(themeColor)
             .rotationEffect(.degrees(randomAngle))
             .animation(.spring(), value: randomAngle)
             .onTapGesture {
@@ -135,10 +140,9 @@ struct Fab: View {
     @Binding var reader: ScrollViewProxy?
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: ColorViewModel
-    @AppStorage("themeColor") var themeColor: String = "f86b1d"
 
     var body: some View {
-        let localThemeCOlor = Color(hex: themeColor)
+        let themeColor = viewModel.themeColor
         Button(action: {
             if searchOrTop {
                 showFilter.toggle()
@@ -159,10 +163,10 @@ struct Fab: View {
                 .scaledToFit()
                 .frame(width: 20, height: 20)
                 .padding(20)
-                .foregroundColor(localThemeCOlor.isLight() ? localThemeCOlor.adjust(brightness: -0.5) : localThemeCOlor.adjust(brightness: 0.5))
+                .foregroundColor(themeColor.isLight() ? themeColor.adjust(brightness: -0.5) : themeColor.adjust(brightness: 0.5))
         })
         .foregroundColor(.white)
-        .background(localThemeCOlor)
+        .background(themeColor)
         .cornerRadius(35)
         .transition(.scale)
         .scaleEffect(showFilter ? 0 : 1)

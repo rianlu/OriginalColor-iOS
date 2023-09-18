@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ColorViewModel: ObservableObject {
     
@@ -15,7 +16,12 @@ class ColorViewModel: ObservableObject {
         ["全部", "白", "灰", "红", "橙", "黄", "绿","青", "蓝", "紫", "其他"]
     @Published var filter: String = "全部"
     
+    // 本地存储颜色
+    @AppStorage("themeColor") var savedThemeColor: String = ""
+    @Published var themeColor: Color = Color("primaryColor")
+    
     init() {
+        themeColor = savedThemeColor.isEmpty ? Color("primaryColor") : Color(hex: savedThemeColor)
         getJsonData()
         filterColorList = colorList
     }
@@ -89,5 +95,10 @@ class ColorViewModel: ObservableObject {
         return hsv(rgb: this.RGB)[0] == hsv(rgb: that.RGB)[0] ?
         hsv(rgb: that.RGB)[1] < hsv(rgb: this.RGB)[1] :
         hsv(rgb: that.RGB)[0] < hsv(rgb: this.RGB)[0]
+    }
+    
+    func updateThemeColor(hex: String) {
+        themeColor = Color(hex: hex)
+        savedThemeColor = hex
     }
 }

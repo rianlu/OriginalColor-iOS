@@ -14,8 +14,7 @@ struct ColorItemView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
     @State var isSHowDetails: Bool = false
-    @AppStorage("themeColor") var themeColor: String = ""
-    
+
     var body: some View {
         let cornerRadius = 16.0
         let cardColor = color.getRGBColor()
@@ -46,12 +45,6 @@ struct ColorItemView: View {
         .padding(4)
         .onTapGesture {
             isSHowDetails.toggle()
-        }
-        .onLongPressGesture {
-            themeColor = color.hex
-            let uiColor = UIColor(Color(hex: themeColor))
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
-            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
         }
         .sheet(isPresented: $isSHowDetails, content: {
             switch horizontalSizeClass {
