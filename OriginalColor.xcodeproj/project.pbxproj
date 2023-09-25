@@ -114,18 +114,16 @@
 		89A2F5962A53E5E500C59108 /* OriginalColor */ = {
 			isa = PBXGroup;
 			children = (
+				89C08A002AC189CE00CC5A8A /* Utils */,
 				89A806422A6A7E7400CC963D /* Info.plist */,
 				890BE6932A67DFC200B56DD2 /* Views */,
 				890BE6922A67DFA700B56DD2 /* Models */,
 				890BE6912A67DEFD00B56DD2 /* ViewModels */,
 				89A4A9F12A57E00400BF6135 /* OriginalColorApp.swift */,
-				898337F62A55506100A815B7 /* ReadData.swift */,
 				89A2F59B2A53E5E600C59108 /* Assets.xcassets */,
 				89A2F59D2A53E5E600C59108 /* OriginalColor.entitlements */,
 				89A2F59E2A53E5E600C59108 /* Preview Content */,
-				89A4A9F32A57F0E200BF6135 /* Extensions.swift */,
 				89CF40DC2A595E6200D5BC1D /* colors.json */,
-				894978E82A78F83800BEAC77 /* HapticManager.swift */,
 			);
 			path = OriginalColor;
 			sourceTree = "<group>";
@@ -135,6 +133,16 @@
 			children = (
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		89C08A002AC189CE00CC5A8A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				898337F62A55506100A815B7 /* ReadData.swift */,
+				89A4A9F32A57F0E200BF6135 /* Extensions.swift */,
+				894978E82A78F83800BEAC77 /* HapticManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

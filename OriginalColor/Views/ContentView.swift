@@ -66,13 +66,15 @@ struct ContentView: View {
                             }
                         }
                         .coordinateSpace(name: "scroll")
-                        .onPreferenceChange(ViewOffsetKey.self) { value in
-                             print("offset: %d", value)
-                         }
                     }
                     .onAppear {
                         self.reader = reader
                     }
+                    .simultaneousGesture(
+                           DragGesture().onChanged({
+                               let isScrollDown = 0 < $0.translation.height
+                               searchOrTop = isScrollDown
+                           }))
                 }
             }
             .safeAreaInset(edge: .bottom, alignment: .trailing) {
@@ -171,14 +173,6 @@ struct Fab: View {
         .transition(.scale)
         .scaleEffect(showFilter ? 0 : 1)
         .animation(.spring(), value: showFilter)
-    }
-}
-
-struct ViewOffsetKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue = CGFloat.zero
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
     }
 }
 
