@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ContentView: View {
     
@@ -26,6 +27,10 @@ struct ContentView: View {
 
     // 用于重新创建标题栏
     @State private var force = UUID()
+    
+    // 更新界面
+    @State var isRefreshing = true
+    @State var isLoading = false
 
     var columns: [GridItem] {
         switch horizontalSizeClass {
@@ -43,68 +48,121 @@ struct ContentView: View {
     
     var body: some View {
         let themeColor = viewModel.themeColor
-        NavigationStack {
-            ZStack {
-                if viewModel.filterColorList.count == 0 {
-                    VStack {
-                        Image("empty_list_placeholder")
-                        Text("EmptyListHint")
-                            .foregroundColor(themeColor)
+        let currentColor = viewModel.getCurrentThemeColor()
+        ZStack {
+            if isRefreshing {
+                themeColor.opacity(0.4)
+                    .ignoresSafeArea()
+                    .blur(radius: 5)
+                Circle()
+                    .trim(from: 0, to: 0.7)
+                    .stroke(themeColor, lineWidth: 10)
+                    .frame(width: 200, height: 200)
+                    .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
+                    .onAppear {
+                        withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
+                            isLoading.toggle()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            reader?.scrollTo(
+                                currentColor.pinyin,
+                                anchor: .top
+                            )
+//                            isRefreshing.toggle()
+                        }
                     }
-                }
-                ScrollViewReader { reader in
-                    ScrollView {
-                        LazyVGrid(columns: columns) {
-                            ForEach(viewModel.filterColorList, id: \.name) { color in
-                                ColorItemView(color: color)
-                                    .onLongPressGesture {
-                                        viewModel.updateThemeColor(hex: color.hex)
-                                        let uiColor = UIColor(themeColor)
-                                        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
-                                        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
-                                    }
+                Text(currentColor.name)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(themeColor)
+                    .frame(width: 160, height: 160)
+            }
+            if !isRefreshing {
+                NavigationStack {
+                    ZStack {
+                        if viewModel.filterColorList.count == 0 {
+                            VStack {
+                                Image("empty_list_placeholder")
+                                Text("EmptyListHint")
+                                    .foregroundColor(themeColor)
                             }
                         }
-                        .coordinateSpace(name: "scroll")
+                        ScrollViewReader { reader in
+                            ScrollView {
+                                LazyVGrid(columns: columns) {
+                                    ForEach(viewModel.filterColorList, id: \.pinyin) { color in
+                                        ColorItemView(color: color)
+                                            .onLongPressGesture {
+                                                withAnimation(.linear(duration: 0.1)) {
+                                                    isRefreshing.toggle()
+                                                }
+                                                viewModel.updateThemeColor(hex: color.hex)
+                                                let uiColor = UIColor(themeColor)
+                                                UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
+                                                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
+                                                WidgetCenter.shared.reloadTimelines(ofKind: "ColorWidget")
+                                            }
+                                    }
+                                }
+                                .coordinateSpace(name: "scroll")
+                            }
+                            .onAppear {
+                                self.reader = reader
+                                // 与切换主题时的 Loading 联动
+                                if isLoading {
+                                    isLoading.toggle()
+                                    reader.scrollTo(currentColor.pinyin,
+                                        anchor: .top
+                                    )
+                                    searchOrTop = false
+                                }
+                            }
+                            .simultaneousGesture(
+                                   DragGesture().onChanged({
+                                       let isScrollDown = 0 < $0.translation.height
+                                       searchOrTop = isScrollDown
+                                   }))
+                        }
                     }
-                    .onAppear {
-                        self.reader = reader
+                    .safeAreaInset(edge: .bottom, alignment: .trailing) {
+                        Fab(
+                            showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
+                        )
                     }
-                    .simultaneousGesture(
-                           DragGesture().onChanged({
-                               let isScrollDown = 0 < $0.translation.height
-                               searchOrTop = isScrollDown
-                           }))
+                    .padding(.horizontal)
+                    .navigationTitle("CFBundleDisplayName")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            navigationLeadingVIew
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(
+                                destination: SettingsScreen(themeColor: themeColor), label: {
+                                    Image(systemName: "gear")
+                                })
+                        }
+                    }
                 }
-            }
-            .safeAreaInset(edge: .bottom, alignment: .trailing) {
-                Fab(
-                    showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
-                )
-            }
-            .padding(.horizontal)
-            .navigationTitle("CFBundleDisplayName")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    navigationLeadingVIew
+                .transition(.opacity)
+                .accentColor(themeColor)
+                .sheet(isPresented: $showFilter) {FilterView(viewmodel: viewModel)}
+                .environmentObject(viewModel)
+                .transition(AnyTransition.opacity.combined(with: .slide))
+                .onAppear {
+                    UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(themeColor)]
+                    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(themeColor)]
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(
-                        destination: SettingsScreen(themeColor: themeColor), label: {
-                            Image(systemName: "gear")
-                        })
-                }
+                .id(themeColor)
+                .onOpenURL(perform: { url in
+                    let linkData = url.host() ?? ""
+                    if !linkData.isEmpty {
+                        reader?.scrollTo(linkData, anchor: .top)
+                    }
+                })
             }
         }
-        .accentColor(themeColor)
-        .sheet(isPresented: $showFilter) {FilterView(viewmodel: viewModel)}
-        .environmentObject(viewModel)
-        .transition(AnyTransition.opacity.combined(with: .slide))
-        .onAppear {
-            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(themeColor)]
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(themeColor)]
-        }
-        .id(themeColor)
     }
     
     var navigationLeadingVIew: some View {
@@ -127,7 +185,7 @@ struct ContentView: View {
                 }
                 randomAngle += 360.0
                 reader?.scrollTo(
-                    viewModel.filterColorList[randomPosition].name,
+                    viewModel.filterColorList[randomPosition].pinyin,
                     anchor: .top
                 )
                 searchOrTop = false
@@ -154,7 +212,7 @@ struct Fab: View {
                     return
                 }
                 reader?.scrollTo(
-                    viewModel.filterColorList[0].name,
+                    viewModel.filterColorList[0].pinyin,
                     anchor: .top
                 )
                 searchOrTop = true

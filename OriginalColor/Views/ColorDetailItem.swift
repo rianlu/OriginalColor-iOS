@@ -79,7 +79,7 @@ struct IPadColorDetailItem: View {
                     }
                     Text(color.pinyin.uppercased())
                         .padding(.top, 8)
-                        .font(.system(size: 88, weight: .bold, design: .rounded))
+                        .font(.system(size: 88, weight: .semibold, design: .rounded))
                         .foregroundColor(color.getRGBColor().opacity(0.3))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)

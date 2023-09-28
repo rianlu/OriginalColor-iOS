@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension Color {
+public extension Color {
     func getHsb() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
         var hue: CGFloat  = 0.0
         var saturation: CGFloat = 0.0

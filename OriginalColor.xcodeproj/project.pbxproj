@@ -14,6 +14,11 @@
 		89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5992A53E5E500C59108 /* ContentView.swift */; };
 		89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59B2A53E5E600C59108 /* Assets.xcassets */; };
 		89A2F5A72A53FBA300C59108 /* OriginalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5A62A53FBA300C59108 /* OriginalColor.swift */; };
+		89A418B22AC42ED90093DEC7 /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898337F62A55506100A815B7 /* ReadData.swift */; };
+		89A418B32AC42EEE0093DEC7 /* OriginalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5A62A53FBA300C59108 /* OriginalColor.swift */; };
+		89A418B42AC42F2C0093DEC7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F32A57F0E200BF6135 /* Extensions.swift */; };
+		89A418B82AC43B7E0093DEC7 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CF40DC2A595E6200D5BC1D /* colors.json */; };
+		89A418B92AC43C1A0093DEC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89D0F92B2AAC083200E6FA08 /* Localizable.strings */; };
 		89A4A9F22A57E00400BF6135 /* OriginalColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F12A57E00400BF6135 /* OriginalColorApp.swift */; };
 		89A4A9F42A57F0E200BF6135 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F32A57F0E200BF6135 /* Extensions.swift */; };
 		89A4A9F62A57F47B00BF6135 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */; };
@@ -21,10 +26,41 @@
 		89A4A9FA2A57FE2700BF6135 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F92A57FE2700BF6135 /* FilterView.swift */; };
 		89B5563B2A5A7F4500F1780C /* ColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */; };
 		89B5563D2A5AA51200F1780C /* ColorDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */; };
+		89C08A082AC18CC000CC5A8A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C08A072AC18CC000CC5A8A /* WidgetKit.framework */; };
+		89C08A0A2AC18CC000CC5A8A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C08A092AC18CC000CC5A8A /* SwiftUI.framework */; };
+		89C08A0D2AC18CC000CC5A8A /* ColorWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C08A0C2AC18CC000CC5A8A /* ColorWidgetBundle.swift */; };
+		89C08A0F2AC18CC000CC5A8A /* ColorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C08A0E2AC18CC000CC5A8A /* ColorWidget.swift */; };
+		89C08A112AC18CC300CC5A8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89C08A102AC18CC300CC5A8A /* Assets.xcassets */; };
+		89C08A152AC18CC300CC5A8A /* ColorWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 89C08A052AC18CC000CC5A8A /* ColorWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		89C08A1C2AC1924500CC5A8A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C08A1B2AC1924500CC5A8A /* DataService.swift */; };
 		89CF40DD2A595E6200D5BC1D /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CF40DC2A595E6200D5BC1D /* colors.json */; };
 		89D0F9292AAC083200E6FA08 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89D0F92B2AAC083200E6FA08 /* Localizable.strings */; };
 		89D94FD42A5D3C9D004E818B /* CopyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D94FD32A5D3C9D004E818B /* CopyListView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89C08A132AC18CC300CC5A8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89A2F58C2A53E5E500C59108 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89C08A042AC18CC000CC5A8A;
+			remoteInfo = ColorWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		89C08A192AC18CC300CC5A8A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				89C08A152AC18CC300CC5A8A /* ColorWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShareCardItem.swift; sourceTree = "<group>"; };
@@ -46,6 +82,15 @@
 		89A806422A6A7E7400CC963D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		89B5563A2A5A7F4500F1780C /* ColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewModel.swift; sourceTree = "<group>"; };
 		89B5563C2A5AA51200F1780C /* ColorDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailItem.swift; sourceTree = "<group>"; };
+		89C08A052AC18CC000CC5A8A /* ColorWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ColorWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		89C08A072AC18CC000CC5A8A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		89C08A092AC18CC000CC5A8A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		89C08A0C2AC18CC000CC5A8A /* ColorWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWidgetBundle.swift; sourceTree = "<group>"; };
+		89C08A0E2AC18CC000CC5A8A /* ColorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWidget.swift; sourceTree = "<group>"; };
+		89C08A102AC18CC300CC5A8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89C08A122AC18CC300CC5A8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89C08A1A2AC190E600CC5A8A /* ColorWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorWidgetExtension.entitlements; sourceTree = "<group>"; };
+		89C08A1B2AC1924500CC5A8A /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		89CF40DC2A595E6200D5BC1D /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
 		89D0F92A2AAC083200E6FA08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		89D0F92C2AAC083B00E6FA08 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -57,6 +102,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89C08A022AC18CC000CC5A8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89C08A0A2AC18CC000CC5A8A /* SwiftUI.framework in Frameworks */,
+				89C08A082AC18CC000CC5A8A /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,9 +150,12 @@
 		89A2F58B2A53E5E500C59108 = {
 			isa = PBXGroup;
 			children = (
+				89C08A1A2AC190E600CC5A8A /* ColorWidgetExtension.entitlements */,
 				89D0F92B2AAC083200E6FA08 /* Localizable.strings */,
 				8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */,
 				89A2F5962A53E5E500C59108 /* OriginalColor */,
+				89C08A0B2AC18CC000CC5A8A /* ColorWidget */,
+				89C08A062AC18CC000CC5A8A /* Frameworks */,
 				89A2F5952A53E5E500C59108 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				89A2F5942A53E5E500C59108 /* OriginalColor.app */,
+				89C08A052AC18CC000CC5A8A /* ColorWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,11 +196,32 @@
 		89C08A002AC189CE00CC5A8A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				898337F62A55506100A815B7 /* ReadData.swift */,
 				89A4A9F32A57F0E200BF6135 /* Extensions.swift */,
+				898337F62A55506100A815B7 /* ReadData.swift */,
 				894978E82A78F83800BEAC77 /* HapticManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		89C08A062AC18CC000CC5A8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				89C08A072AC18CC000CC5A8A /* WidgetKit.framework */,
+				89C08A092AC18CC000CC5A8A /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		89C08A0B2AC18CC000CC5A8A /* ColorWidget */ = {
+			isa = PBXGroup;
+			children = (
+				89C08A0C2AC18CC000CC5A8A /* ColorWidgetBundle.swift */,
+				89C08A0E2AC18CC000CC5A8A /* ColorWidget.swift */,
+				89C08A1B2AC1924500CC5A8A /* DataService.swift */,
+				89C08A102AC18CC300CC5A8A /* Assets.xcassets */,
+				89C08A122AC18CC300CC5A8A /* Info.plist */,
+			);
+			path = ColorWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,15 +234,34 @@
 				89A2F5902A53E5E500C59108 /* Sources */,
 				89A2F5912A53E5E500C59108 /* Frameworks */,
 				89A2F5922A53E5E500C59108 /* Resources */,
+				89C08A192AC18CC300CC5A8A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				89C08A142AC18CC300CC5A8A /* PBXTargetDependency */,
 			);
 			name = OriginalColor;
 			productName = OriginalColor;
 			productReference = 89A2F5942A53E5E500C59108 /* OriginalColor.app */;
 			productType = "com.apple.product-type.application";
+		};
+		89C08A042AC18CC000CC5A8A /* ColorWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89C08A162AC18CC300CC5A8A /* Build configuration list for PBXNativeTarget "ColorWidgetExtension" */;
+			buildPhases = (
+				89C08A012AC18CC000CC5A8A /* Sources */,
+				89C08A022AC18CC000CC5A8A /* Frameworks */,
+				89C08A032AC18CC000CC5A8A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ColorWidgetExtension;
+			productName = ColorWidgetExtension;
+			productReference = 89C08A052AC18CC000CC5A8A /* ColorWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -172,11 +270,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					89A2F5932A53E5E500C59108 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					89C08A042AC18CC000CC5A8A = {
+						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
@@ -195,6 +296,7 @@
 			projectRoot = "";
 			targets = (
 				89A2F5932A53E5E500C59108 /* OriginalColor */,
+				89C08A042AC18CC000CC5A8A /* ColorWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -208,6 +310,16 @@
 				89D0F9292AAC083200E6FA08 /* Localizable.strings in Resources */,
 				8982F4512AAC62FD00FA2718 /* SplashScreen.storyboard in Resources */,
 				89CF40DD2A595E6200D5BC1D /* colors.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89C08A032AC18CC000CC5A8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89C08A112AC18CC300CC5A8A /* Assets.xcassets in Resources */,
+				89A418B92AC43C1A0093DEC7 /* Localizable.strings in Resources */,
+				89A418B82AC43B7E0093DEC7 /* colors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +346,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89C08A012AC18CC000CC5A8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89A418B32AC42EEE0093DEC7 /* OriginalColor.swift in Sources */,
+				89A418B42AC42F2C0093DEC7 /* Extensions.swift in Sources */,
+				89C08A1C2AC1924500CC5A8A /* DataService.swift in Sources */,
+				89C08A0D2AC18CC000CC5A8A /* ColorWidgetBundle.swift in Sources */,
+				89C08A0F2AC18CC000CC5A8A /* ColorWidget.swift in Sources */,
+				89A418B22AC42ED90093DEC7 /* ReadData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89C08A142AC18CC300CC5A8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89C08A042AC18CC000CC5A8A /* ColorWidgetExtension */;
+			targetProxy = 89C08A132AC18CC300CC5A8A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */ = {
@@ -371,6 +504,7 @@
 		89A2F5A42A53E5E600C59108 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OriginalColor/OriginalColor.entitlements;
@@ -416,6 +550,7 @@
 		89A2F5A52A53E5E600C59108 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OriginalColor/OriginalColor.entitlements;
@@ -458,6 +593,76 @@
 			};
 			name = Release;
 		};
+		89C08A172AC18CC300CC5A8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ColorWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A5V7774T6J;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ColorWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ColorWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wzl.originalcolor.OriginalColor.ColorWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		89C08A182AC18CC300CC5A8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ColorWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A5V7774T6J;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ColorWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ColorWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wzl.originalcolor.OriginalColor.ColorWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,6 +680,15 @@
 			buildConfigurations = (
 				89A2F5A42A53E5E600C59108 /* Debug */,
 				89A2F5A52A53E5E600C59108 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89C08A162AC18CC300CC5A8A /* Build configuration list for PBXNativeTarget "ColorWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89C08A172AC18CC300CC5A8A /* Debug */,
+				89C08A182AC18CC300CC5A8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
