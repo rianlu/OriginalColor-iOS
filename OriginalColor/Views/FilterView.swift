@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FilterView: View {
     
-    @ObservedObject var viewmodel: ColorViewModel
+    @EnvironmentObject var viewModel: ColorViewModel
     @State private var searchText = ""
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
@@ -17,18 +17,18 @@ struct FilterView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewmodel.colorStringList, id: \.self) { item in
+                ForEach(viewModel.colorStringList, id: \.self) { item in
                     HStack {
                         Text(NSLocalizedString(item, comment: ""))
                         Spacer()
-                        if item == viewmodel.filter {
+                        if item == viewModel.filter {
                             Image(systemName: "checkmark")
-                                .foregroundColor(viewmodel.themeColor)
+                                .foregroundColor(viewModel.themeColor)
                         }
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        viewmodel.filterColorList(filter: item)
+                        viewModel.filterColorList(filter: item)
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
@@ -36,7 +36,7 @@ struct FilterView: View {
         }
         .searchable(text: $searchText)
         .onSubmit(of: .search) {
-            viewmodel.searchColorList(keyword: searchText)
+            viewModel.searchColorList(keyword: searchText)
             presentationMode.wrappedValue.dismiss()
         }
     }
@@ -44,8 +44,9 @@ struct FilterView: View {
 
 struct SearchFilterView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterView(viewmodel: ColorViewModel())
+        FilterView()
+            .environmentObject(ColorViewModel())
             .environment(\.locale, .init(identifier: "zh-Hans"))
-                .environment(\.locale, .init(identifier: "en"))
+//            .environment(\.locale, .init(identifier: "en"))
     }
 }

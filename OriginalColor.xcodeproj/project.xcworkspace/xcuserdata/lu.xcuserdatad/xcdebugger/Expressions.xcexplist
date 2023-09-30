@@ -3,12 +3,32 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #3 in ColorItemView.body.getter:ColorItemView.swift">
+      </ContextState>
+      <ContextState
          contextName = "ColorItemView.body.getter:ColorItemView.swift">
          <PersistentStrings>
             <PersistentString
                value = "color">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #5 in closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "hex">
+            </PersistentString>
+            <PersistentString
+               value = "url.description">
+            </PersistentString>
+            <PersistentString
+               value = "reader == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ColorItemView.body.getter:ColorItemView.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

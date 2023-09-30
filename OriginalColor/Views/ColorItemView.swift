@@ -9,11 +9,9 @@ import SwiftUI
 
 struct ColorItemView: View {
     
-//    @State var isSHowDetails: Bool = false
     @State var color: OriginalColor
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
-    @State var isSHowDetails: Bool = false
 
     var body: some View {
         let cornerRadius = 16.0
@@ -41,28 +39,14 @@ struct ColorItemView: View {
             }
             .padding()
         }
-        .frame(width: .infinity, height: 240)
-        .padding(4)
-        .onTapGesture {
-            isSHowDetails.toggle()
-        }
-        .sheet(isPresented: $isSHowDetails, content: {
-            switch horizontalSizeClass {
-            case .regular:
-                IPadColorDetailItem(color: color)
-                    .presentationDragIndicator(.visible)
-            default:
-                ColorDetailItem(color: color)
-                    .presentationDetents([.height(249)])
-                    .presentationDragIndicator(.visible)
-            }
-        })
-    }
+        .frame(height: 240)
+        .contentShape(Rectangle())
+     }
 }
 
 struct ColorItemView_Previews: PreviewProvider {
     @State static var changeThemeColor = false
     static var previews: some View {
-        ColorItemView(color: OriginalColor(RGB: [222, 28, 49], name: "唐菖蒲红", pinyin: "tangchangpuhong"))
+        ColorItemView(color: ColorViewModel().getCurrentThemeColor())
     }
 }

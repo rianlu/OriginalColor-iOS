@@ -13,20 +13,20 @@ struct ColorDetailItem: View {
     
     @State var color: OriginalColor
     @Environment(\.colorScheme) var colorScheme
-    @State var renderedImage: Image = Image(systemName: "photo")
+    @State var renderedImage = Image(systemName: "photo")
     @Environment(\.displayScale) var displayScale
 
     var body: some View {
+        let themeColor = color.getRGBColor()
         ZStack {
-            color.getRGBColor().opacity(0.5)
-            .ignoresSafeArea()
+            themeColor.opacity(0.5).ignoresSafeArea()
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                     Spacer()
                     HStack {
                         Text(color.name)
                             .font(.title)
-                            .foregroundColor(color.getRGBColor()).opacity(0.9)
+                            .foregroundColor(themeColor).opacity(0.9)
                             .brightness(colorScheme == .light ? -0.1 : 0.1)
                         Spacer()
                         ShareLink("",
@@ -36,7 +36,7 @@ struct ColorDetailItem: View {
                     }.padding([.top], 8)
                     HStack(alignment: .center, content: {
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(color.getRGBColor())
+                            .fill(themeColor)
                             .frame(height: 160)
                             .padding([.trailing], 4)
                         CopyListView(color: color,withMark: false, smallFont: true)
@@ -45,12 +45,14 @@ struct ColorDetailItem: View {
                 .padding()
             }
         }
-        .onAppear { render(color: color) }
+        .onAppear { render() }
+        .presentationDetents([.height(250)])
+        .presentationDragIndicator(.visible)
     }
     
-    @MainActor func render(color: OriginalColor) {
+    @MainActor func render() {
         let renderer = ImageRenderer(content: ColorShareCardItem(color: color))
-
+        renderer.scale = displayScale
         if let uiImage = renderer.uiImage {
             renderedImage = Image(uiImage: uiImage)
         }
@@ -103,19 +105,21 @@ struct IPadColorDetailItem: View {
                     }
                 }
                 .padding()
-                .presentationDetents([.height(300)])
-            .presentationDragIndicator(.visible)
             }
         }
+        .presentationDragIndicator(.visible)
+
     }
 }
 
 struct ColorDetailItem_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ColorDetailItem(color: OriginalColor(RGB: [23, 129, 181], hex: "#ff00ff", name: "哈哈哈", pinyin: "houmaohui"))
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-            .previewDisplayName("iPhone 14 Pro")
-        IPadColorDetailItem(color: OriginalColor(RGB: [23, 129, 181], hex: "#ff00ff", name: "哈哈哈", pinyin: "houmaohui"))
+        let color = ColorViewModel().getCurrentThemeColor()
+        ColorDetailItem(color: color)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
+            .previewDisplayName("iPhone 15 Pro")
+        IPadColorDetailItem(color: color)
             .previewDevice(PreviewDevice(rawValue: "iPad mini (6th generation)"))
             .previewDisplayName("iPad mini (6th generation)")
     }

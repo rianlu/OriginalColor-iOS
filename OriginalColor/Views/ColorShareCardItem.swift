@@ -15,7 +15,6 @@ struct ColorShareCardItem: View {
         let cardColor = color.getRGBColor()
         ZStack {
             cardColor.brightness(0.5)
-            .ignoresSafeArea()
             VStack(alignment: .leading) {
                 Text(color.name)
                     .font(.title)
@@ -40,16 +39,16 @@ struct ColorShareCardItem: View {
                 })
             }
             .padding()
-            .frame(width: 400, height: 249)
             .cornerRadius(16)
         }
+        .frame(width: 400, height: 249)
     }
 }
 
 struct ColorShareCardItem_Previews: PreviewProvider {
     static var previews: some View {
         ColorShareCardItem(
-            color: OriginalColor(RGB: [23, 129, 181], hex: "#ff00ff", name: "哈哈哈", pinyin: "houmaohui")
+            color: ColorViewModel().getCurrentThemeColor()
         )
     }
 }

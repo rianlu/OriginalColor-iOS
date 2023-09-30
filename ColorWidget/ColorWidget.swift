@@ -69,7 +69,7 @@ struct ColorWidgetEntryView : View {
             default:
                 MediumContentView(entry: entry)
             }
-        }.widgetURL(URL(string: "widget-deeplink://\(entry.color.pinyin)"))
+        }.widgetURL(URL(string: "widget-deeplink://color/?name=\(entry.color.name)"))
     }
 }
 

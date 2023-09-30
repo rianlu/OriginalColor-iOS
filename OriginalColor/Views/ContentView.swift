@@ -13,7 +13,7 @@ struct ContentView: View {
     @StateObject var viewModel: ColorViewModel = ColorViewModel()
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
-
+    
     // FAB
     @State var searchOrTop: Bool = true
     // 搜索&筛选
@@ -24,62 +24,36 @@ struct ContentView: View {
     @State var randomAngle = 0.0
     // 屏幕尺寸
     @State var isPad = false
-
-    // 用于重新创建标题栏
-    @State private var force = UUID()
     
     // 更新界面
-    @State var isRefreshing = true
+    @State var isRefreshing = false
     @State var isLoading = false
-
+    
+    // 选中的 Item
+    @State var selectedItem: OriginalColor?
+    
     var columns: [GridItem] {
         switch horizontalSizeClass {
-        case .compact:
-            return [GridItem()]
         case .regular:
             isPad = true
-            return [GridItem(), GridItem()]
+            return [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)]
         default:
-            return [GridItem()]
+            return [GridItem(.flexible())]
         }
     }
     
     @State private var reader: ScrollViewProxy?
     
     var body: some View {
-        let themeColor = viewModel.themeColor
         let currentColor = viewModel.getCurrentThemeColor()
+        let themeColor = currentColor.getRGBColor()
+        
         ZStack {
             if isRefreshing {
-                themeColor.opacity(0.4)
-                    .ignoresSafeArea()
-                    .blur(radius: 5)
-                Circle()
-                    .trim(from: 0, to: 0.7)
-                    .stroke(themeColor, lineWidth: 10)
-                    .frame(width: 200, height: 200)
-                    .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
-                    .onAppear {
-                        withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
-                            isLoading.toggle()
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                            reader?.scrollTo(
-                                currentColor.pinyin,
-                                anchor: .top
-                            )
-//                            isRefreshing.toggle()
-                        }
-                    }
-                Text(currentColor.name)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(themeColor)
-                    .frame(width: 160, height: 160)
-            }
-            if !isRefreshing {
+                LoadingView(isLoading: $isLoading, currentColor: currentColor, endAction: {
+                    isRefreshing.toggle()
+                })
+            } else {
                 NavigationStack {
                     ZStack {
                         if viewModel.filterColorList.count == 0 {
@@ -91,19 +65,23 @@ struct ContentView: View {
                         }
                         ScrollViewReader { reader in
                             ScrollView {
-                                LazyVGrid(columns: columns) {
-                                    ForEach(viewModel.filterColorList, id: \.pinyin) { color in
+                                LazyVGrid(columns: columns, spacing: 16) {
+                                    ForEach(viewModel.filterColorList, id: \.name) { color in
                                         ColorItemView(color: color)
-                                            .onLongPressGesture {
-                                                withAnimation(.linear(duration: 0.1)) {
-                                                    isRefreshing.toggle()
-                                                }
-                                                viewModel.updateThemeColor(hex: color.hex)
-                                                let uiColor = UIColor(themeColor)
-                                                UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
-                                                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
-                                                WidgetCenter.shared.reloadTimelines(ofKind: "ColorWidget")
+                                            .onTapGesture {
+                                                selectedItem = color
                                             }
+                                            .onLongPressGesture {
+                                                changeTheme(color: color)
+                                            }
+                                    }
+                                    .sheet(item: $selectedItem) { item in
+                                        switch horizontalSizeClass {
+                                        case .regular:
+                                            IPadColorDetailItem(color: item)
+                                        default:
+                                            ColorDetailItem(color: item)
+                                        }
                                     }
                                 }
                                 .coordinateSpace(name: "scroll")
@@ -113,17 +91,15 @@ struct ContentView: View {
                                 // 与切换主题时的 Loading 联动
                                 if isLoading {
                                     isLoading.toggle()
-                                    reader.scrollTo(currentColor.pinyin,
-                                        anchor: .top
-                                    )
+                                    reader.scrollTo(currentColor.name,anchor: .top)
                                     searchOrTop = false
                                 }
                             }
                             .simultaneousGesture(
-                                   DragGesture().onChanged({
-                                       let isScrollDown = 0 < $0.translation.height
-                                       searchOrTop = isScrollDown
-                                   }))
+                                DragGesture().onChanged({
+                                    let isScrollDown = 0 < $0.translation.height
+                                    searchOrTop = isScrollDown
+                                }))
                         }
                     }
                     .safeAreaInset(edge: .bottom, alignment: .trailing) {
@@ -131,7 +107,7 @@ struct ContentView: View {
                             showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
                         )
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 16)
                     .navigationTitle("CFBundleDisplayName")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -147,7 +123,7 @@ struct ContentView: View {
                 }
                 .transition(.opacity)
                 .accentColor(themeColor)
-                .sheet(isPresented: $showFilter) {FilterView(viewmodel: viewModel)}
+                .sheet(isPresented: $showFilter) {FilterView()}
                 .environmentObject(viewModel)
                 .transition(AnyTransition.opacity.combined(with: .slide))
                 .onAppear {
@@ -156,13 +132,29 @@ struct ContentView: View {
                 }
                 .id(themeColor)
                 .onOpenURL(perform: { url in
-                    let linkData = url.host() ?? ""
-                    if !linkData.isEmpty {
-                        reader?.scrollTo(linkData, anchor: .top)
+                    let colorName = url.valueOf("name")
+                    print(colorName != nil)
+                    print(viewModel.filterColorList.contains(where: { color in
+                        return color.name == colorName
+                    }))
+                    if (colorName != nil && reader != nil) {
+                        reader?.scrollTo(1, anchor: .top)
                     }
                 })
             }
         }
+    }
+    
+    func changeTheme(color: OriginalColor) {
+        withAnimation(.linear(duration: 0.1)) {
+            isRefreshing.toggle()
+        }
+        viewModel.updateThemeColor(hex: color.hex)
+        let uiColor = UIColor(color.getRGBColor())
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
+        // 修改 Widget 颜色
+        WidgetCenter.shared.reloadTimelines(ofKind: "ColorWidget")
     }
     
     var navigationLeadingVIew: some View {
@@ -185,7 +177,7 @@ struct ContentView: View {
                 }
                 randomAngle += 360.0
                 reader?.scrollTo(
-                    viewModel.filterColorList[randomPosition].pinyin,
+                    viewModel.filterColorList[randomPosition].name,
                     anchor: .top
                 )
                 searchOrTop = false
@@ -200,7 +192,7 @@ struct Fab: View {
     @Binding var reader: ScrollViewProxy?
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: ColorViewModel
-
+    
     var body: some View {
         let themeColor = viewModel.themeColor
         Button(action: {
@@ -212,7 +204,7 @@ struct Fab: View {
                     return
                 }
                 reader?.scrollTo(
-                    viewModel.filterColorList[0].pinyin,
+                    viewModel.filterColorList[0].name,
                     anchor: .top
                 )
                 searchOrTop = true
@@ -234,10 +226,18 @@ struct Fab: View {
     }
 }
 
+extension URL {
+    func valueOf(_ queryParameterName: String) -> String? {
+        guard let url = URLComponents(string: self.absoluteString) else { return nil }
+        return url.queryItems?.first(where: { $0.name == queryParameterName })?.value
+    }
+}
+
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-                    .environment(\.locale, .init(identifier: "zh-Hans"))
-//                        .environment(\.locale, .init(identifier: "en"))
+            .environment(\.locale, .init(identifier: "zh-Hans"))
+        //                        .environment(\.locale, .init(identifier: "en"))
     }
 }

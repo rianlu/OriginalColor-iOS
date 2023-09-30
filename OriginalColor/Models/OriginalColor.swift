@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct OriginalColor: Codable {
+struct OriginalColor: Codable, Identifiable {
+
+    var id = UUID()
     // CMYK 四色
     var CMYK: [Int] = [0, 0, 0, 0]
     var RGB: [Int] = [0, 0, 0]
@@ -16,6 +18,14 @@ struct OriginalColor: Codable {
     var name: String = ""
     // 中文拼音
     var pinyin: String = ""
+    
+    private enum CodingKeys: String, CodingKey {
+        case CMYK
+        case RGB
+        case hex
+        case name
+        case pinyin
+    }
     
     func getRGBColor() -> Color {
         return Color(red: getR(), green: getG(), blue: getB())
