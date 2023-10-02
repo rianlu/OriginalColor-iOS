@@ -42,7 +42,8 @@ struct ContentView: View {
         }
     }
     
-    @State private var reader: ScrollViewProxy?
+    @State private var mReader: ScrollViewProxy?
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
         let currentColor = viewModel.getCurrentThemeColor()
@@ -87,12 +88,11 @@ struct ContentView: View {
                                 .coordinateSpace(name: "scroll")
                             }
                             .onAppear {
-                                self.reader = reader
+                                self.mReader = reader
                                 // 与切换主题时的 Loading 联动
                                 if isLoading {
                                     isLoading.toggle()
                                     reader.scrollTo(currentColor.name,anchor: .top)
-                                    searchOrTop = false
                                 }
                             }
                             .simultaneousGesture(
@@ -100,11 +100,22 @@ struct ContentView: View {
                                     let isScrollDown = 0 < $0.translation.height
                                     searchOrTop = isScrollDown
                                 }))
+                            .onOpenURL(perform: { url in
+                                guard let query = url.query() else { return }
+                                let index = query.index(query.startIndex, offsetBy: 5)
+                                let name = query.suffix(from: index)
+                                    .removingPercentEncoding
+                                if (name != nil && viewModel.filterColorList.contains {
+                                    $0.name == name
+                                }) {
+                                    reader.scrollTo(name!, anchor: .top)
+                                }
+                            })
                         }
                     }
                     .safeAreaInset(edge: .bottom, alignment: .trailing) {
                         Fab(
-                            showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $reader
+                            showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $mReader
                         )
                     }
                     .padding(.horizontal, 16)
@@ -131,16 +142,6 @@ struct ContentView: View {
                     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(themeColor)]
                 }
                 .id(themeColor)
-                .onOpenURL(perform: { url in
-                    let colorName = url.valueOf("name")
-                    print(colorName != nil)
-                    print(viewModel.filterColorList.contains(where: { color in
-                        return color.name == colorName
-                    }))
-                    if (colorName != nil && reader != nil) {
-                        reader?.scrollTo(1, anchor: .top)
-                    }
-                })
             }
         }
     }
@@ -176,7 +177,7 @@ struct ContentView: View {
                     HapticManager.instance.impact(style: .soft)
                 }
                 randomAngle += 360.0
-                reader?.scrollTo(
+                mReader?.scrollTo(
                     viewModel.filterColorList[randomPosition].name,
                     anchor: .top
                 )

@@ -47,7 +47,6 @@ struct SettingsScreen: View {
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                print("Click")
                                 goToAppStore()
                             }
                         }

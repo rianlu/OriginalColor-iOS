@@ -29,7 +29,6 @@ struct LoadingView: View {
                         isLoading.toggle()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        isLoading.toggle()
                         endAction()
                     }
                 }
