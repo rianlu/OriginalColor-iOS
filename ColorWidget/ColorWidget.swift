@@ -134,21 +134,33 @@ struct LargeContentView: View {
     var body: some View {
         let cardColor = entry.color.getRGBColor()
         ZStack {
-            Text(entry.color.pinyin.uppercased())
-                .font(.system(size: 80, weight: .bold, design: .rounded))
-                .lineLimit(3)
-                .multilineTextAlignment(.center)
-                .scaleEffect(1.5)
-                .foregroundColor(cardColor).opacity(0.2)
-                .brightness(cardColor.isLight() ? -0.3 : -0.1)
-                .blur(radius: 5)
-            VStack(alignment: .center) {
+            VStack {
                 Spacer()
-                Text(entry.color.name)
-                    .font(.system(size: 60, weight: .bold, design: .rounded))
-                    .foregroundColor(cardColor)
-                    .brightness(cardColor.isLight() ? -0.3 : -0.1)
-                    .minimumScaleFactor(0.5)
+                HStack {
+                    Spacer()
+                    Text(entry.color.pinyin.uppercased())
+                        .font(.system(size: 80, weight: .bold, design: .rounded))
+                        .lineLimit(3)
+                        .multilineTextAlignment(.center)
+                        .scaleEffect(1.5)
+                        .foregroundColor(cardColor).opacity(0.2)
+                        .brightness(cardColor.isLight() ? -0.3 : -0.1)
+                        .blur(radius: 5)
+                    Spacer()
+                }
+                Spacer()
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Text(entry.color.name)
+                        .font(.system(size: 60, weight: .bold, design: .rounded))
+                        .foregroundColor(cardColor)
+                        .brightness(cardColor.isLight() ? -0.3 : -0.1)
+                        .minimumScaleFactor(0.5)
+                    Spacer()
+                }
                 Spacer()
             }
         }
@@ -180,6 +192,6 @@ struct ColorWidget: Widget {
     ColorWidget()
 } timeline: {
     let data = DataService()
-    SimpleEntry(date: .now, color: OriginalColor(RGB: [222, 28, 49], name: "唐菖蒲红", pinyin: "tangchangpuhong"))
+    SimpleEntry(date: .now, color: OriginalColor(RGB: [23, 129, 181], name: "釉蓝", pinyin: "youlan"))
     SimpleEntry(date: .now, color: data.getWidgetColor())
 }
