@@ -18,11 +18,16 @@ class ColorViewModel: ObservableObject {
     
     // 本地存储颜色
     @AppStorage("themeColor", 
-                store: UserDefaults(suiteName: "group.com.wzl.originalcolor")) var savedThemeColor: String = ""
-    @Published var themeColor: Color = Color("primaryColor")
+                store: UserDefaults(suiteName: "group.com.wzl.originalcolor")) 
+    var savedThemeColor: String = "#f86b1d"
+    @Published var themeColor: Color = Color(hex: "#f86b1d")
+    var proxy: ScrollViewProxy?
+    
+    // 随机颜色
+    @Published var randomColorName: String = ""
     
     init() {
-        themeColor = savedThemeColor.isEmpty ? Color("primaryColor") : Color(hex: savedThemeColor)
+        themeColor = Color(hex: savedThemeColor)
         getJsonData()
         filterColorList = colorList
     }
@@ -59,7 +64,7 @@ class ColorViewModel: ObservableObject {
             return
         } else {
             filterColorList = colorList.filter { color in
-                String(color.name.last!).contains(keyword)
+                color.name.contains(keyword)
             }
         }
     }
@@ -105,7 +110,21 @@ class ColorViewModel: ObservableObject {
     
     func getCurrentThemeColor() -> OriginalColor {
         return colorList.first {
-            $0.hex == (savedThemeColor.isEmpty ? "#f86b1d" : savedThemeColor)
+            $0.hex == savedThemeColor
         } ?? colorList[Int.random(in: 0..<colorList.count)]
+    }
+    
+    func scrollTo(name: String, anchor: UnitPoint = .top) {
+//        guard let index = colorList.firstIndex(where: {$0.name == name}) else {
+//            return
+//        }
+        randomColorName = name
+        proxy?.scrollTo(name, anchor: anchor)
+//        if index == 0 {
+//        } else {
+////            let lastName = colorList[index - 1].name
+////            proxy?.scrollTo(lastName, anchor: anchor)
+//            proxy?.scrollTo(name, anchor: anchor)
+//        }
     }
 }

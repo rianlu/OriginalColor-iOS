@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "OriginalColor.svg",
+      "filename" : "splash_logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "splash_logo 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "splash_logo 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

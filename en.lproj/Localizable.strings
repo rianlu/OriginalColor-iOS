@@ -10,6 +10,7 @@
 // Settings
 "About" = "About";
 "Version" = "Version";
+"CurrentThemeColor" = "Current Theme Color";
 "Vibration" = "Vibration";
 "UnknownVersion" = "UnknownVersion";
 "EmptyListHint" = "Sorry not found~";

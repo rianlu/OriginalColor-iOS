@@ -11,6 +11,7 @@
 // Settings
 "About" = "关于";
 "Version" = "版本";
+"CurrentThemeColor" = "当前主题色";
 "Vibration" = "震动";
 "UnknownVersion" = "未知版本";
 

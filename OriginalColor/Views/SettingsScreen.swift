@@ -9,12 +9,16 @@ import SwiftUI
 
 struct SettingsScreen: View {
     
-    @State var themeColor: Color
+    @State var currentColor: OriginalColor
     @AppStorage("vibration") var vibration: Bool = true
     @Environment(\.colorScheme) var colorScheme
+    @State var isPressed = false
+    @Environment (\.horizontalSizeClass) var horizontalSizeClass
+
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? NSLocalizedString("UnknownVersion", comment: "")
     
     var body: some View {
+        let themeColor = currentColor.getRGBColor()
         NavigationStack {
             ZStack {
                 Color(UIColor.systemGroupedBackground)
@@ -36,6 +40,16 @@ struct SettingsScreen: View {
                                     .opacity(0.5)
                             }
                             HStack {
+                                Text("CurrentThemeColor")
+                                Spacer()
+                                Text(currentColor.name)
+                                    .foregroundColor(themeColor)
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                isPressed.toggle()
+                            }
+                            HStack {
                                 Toggle(isOn: $vibration) {
                                     Text("Vibration")
                                 }
@@ -51,7 +65,6 @@ struct SettingsScreen: View {
                             }
                         }
                         HStack {
-                            Spacer()
                             VStack(alignment: .center, content: {
                                 Group {
                                     Text(.init("Copyright © 2013 by [Perchouli](http://dmyz.org/) Shanzhai to [Nipponcolors](http://nipponcolors.com/)"))
@@ -62,10 +75,11 @@ struct SettingsScreen: View {
                                 .foregroundColor(.gray)
                                 .font(.subheadline)
                             })
-                            Spacer()
+                            .padding(16)
                         }
-                            .listRowBackground(
-                                Color(UIColor.systemGroupedBackground))
+                        .listRowBackground(
+                            Color(UIColor.systemGroupedBackground)
+                            )
                     }
                     Text("Developed by 禄眠")
                         .foregroundColor(themeColor)
@@ -74,6 +88,14 @@ struct SettingsScreen: View {
                         .opacity(0.8)
                 }
             }
+            .sheet(isPresented: $isPressed, content: {
+                switch horizontalSizeClass {
+                case .regular:
+                    IPadColorDetailItem(color: currentColor)
+                default:
+                    ColorDetailItem(color: currentColor)
+                }
+            })
         }
     }
 }
@@ -94,8 +116,9 @@ private func goToAppStore() {
 
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
+        let color = ColorViewModel().getCurrentThemeColor()
         NavigationStack {
-            SettingsScreen(themeColor: Color("primaryColor"))
+            SettingsScreen(currentColor: color)
                 .environment(\.locale, .init(identifier: "zh-Hans"))
 //                .environment(\.locale, .init(identifier: "en"))
         }

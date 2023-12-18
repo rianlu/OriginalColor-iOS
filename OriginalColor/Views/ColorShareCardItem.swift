@@ -12,24 +12,24 @@ struct ColorShareCardItem: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        let cardColor = color.getRGBColor()
+        let themeColor = color.getRGBColor()
         ZStack {
-            cardColor.brightness(0.5)
+            Color.blend(color1: UIColor(themeColor), intensity1: 0.5, color2: .white, intensity2: 0.5)
             VStack(alignment: .leading) {
                 Text(color.name)
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(cardColor)
-                    .brightness(-0.1)
+                    .foregroundColor(themeColor)
+                    .brightness(-0.05)
                     .padding([.top], 8)
                 HStack(alignment: .center, content: {
                     RoundedRectangle(cornerRadius: 16)
-                        .frame(width: .infinity, height: 150)
-                        .foregroundColor(cardColor)
+                        .foregroundColor(themeColor)
                         .shadow(
-                            color: cardColor,
-                            radius: 5
+                            color: themeColor,
+                            radius: 16
                         )
+                        .padding(8)
                     VStack {
                         CopyItemView(colorString: color.hex, smallFont: true, hideCopyIcon: true)
                         CopyItemView(colorString: color.getRGBString(), smallFont: true, hideCopyIcon: true)

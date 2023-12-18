@@ -10,9 +10,9 @@ import WidgetKit
 
 struct ContentView: View {
     
-    @StateObject var viewModel: ColorViewModel = ColorViewModel()
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
+    @StateObject var viewModel: ColorViewModel
     
     // FAB
     @State var searchOrTop: Bool = true
@@ -24,14 +24,14 @@ struct ContentView: View {
     @State var randomAngle = 0.0
     // 屏幕尺寸
     @State var isPad = false
-    
+ 
     // 更新界面
     @State var isRefreshing = false
     @State var isLoading = false
     
     // 选中的 Item
     @State var selectedItem: OriginalColor?
-    
+
     var columns: [GridItem] {
         switch horizontalSizeClass {
         case .regular:
@@ -42,7 +42,6 @@ struct ContentView: View {
         }
     }
     
-    @State private var mReader: ScrollViewProxy?
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
@@ -54,6 +53,7 @@ struct ContentView: View {
                 LoadingView(isLoading: $isLoading, currentColor: currentColor, endAction: {
                     isRefreshing.toggle()
                 })
+                .transition(.opacity)
             } else {
                 NavigationStack {
                     ZStack {
@@ -64,42 +64,51 @@ struct ContentView: View {
                                     .foregroundColor(themeColor)
                             }
                         }
-                        ScrollViewReader { reader in
-                            ScrollView {
-                                LazyVGrid(columns: columns, spacing: 16) {
-                                    ForEach(viewModel.filterColorList, id: \.name) { color in
-                                        ColorItemView(color: color)
-                                            .onTapGesture {
-                                                selectedItem = color
+                        ScrollViewReader { proxy in
+                                ScrollView {
+                                    // 不适用自带的spacing，直接设置在item里
+                                    LazyVGrid(columns: columns, spacing: 0) {
+                                        ForEach(viewModel.filterColorList, id: \.name) { color in
+                                            ColorItemView(color: color)
+                                                .padding(.top, 16)
+//                                                .padding(
+//                                                    if isPad {
+//                                                        [.top, .horizontal], 16
+//                                                    } else {
+//                                                        [.top, .horizontal], 16
+//                                                    }
+//                                                )
+                                                .onTapGesture {
+                                                    selectedItem = color
+                                                }
+                                                .onLongPressGesture {
+                                                    changeTheme(color: color)
+                                                }
+                                        }
+                                        .sheet(item: $selectedItem) { item in
+                                            switch horizontalSizeClass {
+                                            case .regular:
+                                                IPadColorDetailItem(color: item)
+                                            default:
+                                                ColorDetailItem(color: item)
                                             }
-                                            .onLongPressGesture {
-                                                changeTheme(color: color)
-                                            }
-                                    }
-                                    .sheet(item: $selectedItem) { item in
-                                        switch horizontalSizeClass {
-                                        case .regular:
-                                            IPadColorDetailItem(color: item)
-                                        default:
-                                            ColorDetailItem(color: item)
                                         }
                                     }
+                                    .coordinateSpace(name: "scroll")
                                 }
-                                .coordinateSpace(name: "scroll")
-                            }
                             .onAppear {
-                                self.mReader = reader
+                                viewModel.proxy = proxy
                                 // 与切换主题时的 Loading 联动
                                 if isLoading {
                                     isLoading.toggle()
-                                    reader.scrollTo(currentColor.name,anchor: .top)
+                                    viewModel.scrollTo(name: currentColor.name)
                                 }
                             }
-                            .simultaneousGesture(
-                                DragGesture().onChanged({
-                                    let isScrollDown = 0 < $0.translation.height
-                                    searchOrTop = isScrollDown
-                                }))
+//                            .simultaneousGesture(
+//                                DragGesture().onChanged({
+//                                    let isScrollDown = 0 < $0.translation.height
+//                                    searchOrTop = isScrollDown
+//                                }))
                             .onOpenURL(perform: { url in
                                 guard let query = url.query() else { return }
                                 let index = query.index(query.startIndex, offsetBy: 5)
@@ -108,15 +117,16 @@ struct ContentView: View {
                                 if (name != nil && viewModel.filterColorList.contains {
                                     $0.name == name
                                 }) {
-                                    reader.scrollTo(name!, anchor: .top)
+                                    viewModel.scrollTo(name: name!)
                                 }
                             })
                         }
                     }
                     .safeAreaInset(edge: .bottom, alignment: .trailing) {
                         Fab(
-                            showFilter: $showFilter, searchOrTop: $searchOrTop, reader: $mReader
+                            showFilter: $showFilter, searchOrTop: $searchOrTop
                         )
+//                        .padding([.trailing], 16)
                     }
                     .padding(.horizontal, 16)
                     .navigationTitle("CFBundleDisplayName")
@@ -126,7 +136,7 @@ struct ContentView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(
-                                destination: SettingsScreen(themeColor: themeColor), label: {
+                                destination: SettingsScreen(currentColor: currentColor), label: {
                                     Image(systemName: "gear")
                                 })
                         }
@@ -152,6 +162,7 @@ struct ContentView: View {
         }
         viewModel.updateThemeColor(hex: color.hex)
         let uiColor = UIColor(color.getRGBColor())
+        // 修改标题栏文字颜色
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
         // 修改 Widget 颜色
@@ -163,7 +174,8 @@ struct ContentView: View {
         return Image("random.cube")
             .foregroundColor(themeColor)
             .rotationEffect(.degrees(randomAngle))
-            .animation(.spring(), value: randomAngle)
+            .animation(
+                .spring(duration: 1, bounce: 0.4), value: randomAngle)
             .onTapGesture {
                 let count = viewModel.filterColorList.count
                 if count == 0 {
@@ -176,11 +188,9 @@ struct ContentView: View {
                 if vibration {
                     HapticManager.instance.impact(style: .soft)
                 }
-                randomAngle += 360.0
-                mReader?.scrollTo(
-                    viewModel.filterColorList[randomPosition].name,
-                    anchor: .top
-                )
+                randomAngle += 720.0
+                viewModel.scrollTo(name: viewModel.filterColorList[randomPosition].name)
+                // item 滚动偏移动画
                 searchOrTop = false
             }
     }
@@ -190,7 +200,6 @@ struct Fab: View {
     
     @Binding var showFilter: Bool
     @Binding var searchOrTop: Bool
-    @Binding var reader: ScrollViewProxy?
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: ColorViewModel
     
@@ -204,10 +213,7 @@ struct Fab: View {
                 if count == 0 {
                     return
                 }
-                reader?.scrollTo(
-                    viewModel.filterColorList[0].name,
-                    anchor: .top
-                )
+                viewModel.scrollTo(name: viewModel.filterColorList[0].name)
                 searchOrTop = true
             }
         }, label: {
@@ -220,7 +226,7 @@ struct Fab: View {
         })
         .foregroundColor(.white)
         .background(themeColor)
-        .cornerRadius(35)
+        .cornerRadius(16.0)
         .transition(.scale)
         .scaleEffect(showFilter ? 0 : 1)
         .animation(.spring(), value: showFilter)
@@ -237,7 +243,7 @@ extension URL {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ColorViewModel())
             .environment(\.locale, .init(identifier: "zh-Hans"))
         //                        .environment(\.locale, .init(identifier: "en"))
     }
