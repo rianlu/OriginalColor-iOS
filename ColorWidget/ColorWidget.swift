@@ -51,8 +51,8 @@ struct ColorWidgetEntryView : View {
     var body: some View {
         let cornerRadius = 16.0
         let cardColor = entry.color.getRGBColor()
-        var colorName = entry.color.name
-        var url = URL(string: "widget-deeplink://color")
+        let colorName = entry.color.name
+        let url = URL(string: "widget-deeplink://color")
         
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: cornerRadius)
@@ -72,7 +72,14 @@ struct ColorWidgetEntryView : View {
             default:
                 MediumContentView(entry: entry)
             }
-        }.widgetURL(url?.appending(queryItems: [URLQueryItem(name: "name", value: colorName)]))
+        }.widgetURL(
+            url?.appending(
+                queryItems: [
+                    URLQueryItem(name: "name", value: colorName),
+                    URLQueryItem(name: "hex", value: entry.color.hex)
+                ]
+            )
+        )
     }
 }
 

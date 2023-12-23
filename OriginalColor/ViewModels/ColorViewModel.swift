@@ -23,8 +23,8 @@ class ColorViewModel: ObservableObject {
     @Published var themeColor: Color = Color(hex: "#f86b1d")
     var proxy: ScrollViewProxy?
     
-    // 随机颜色
-    @Published var randomColorName: String = ""
+    // 随机颜色，不用name，因为name会重复
+    @Published var randomColorHex: String = ""
     
     init() {
         themeColor = Color(hex: savedThemeColor)
@@ -65,6 +65,21 @@ class ColorViewModel: ObservableObject {
         } else {
             filterColorList = colorList.filter { color in
                 color.name.contains(keyword)
+            }
+        }
+    }
+    
+    func findColorByHex(hex: String) -> OriginalColor? {
+        if hex == "" {
+            return nil
+        } else {
+            let list = colorList.filter { color in
+                color.hex == hex
+            }
+            if list.isEmpty {
+                return nil
+            } else {
+                return list.first
             }
         }
     }
@@ -114,12 +129,12 @@ class ColorViewModel: ObservableObject {
         } ?? colorList[Int.random(in: 0..<colorList.count)]
     }
     
-    func scrollTo(name: String, anchor: UnitPoint = .top) {
+    func scrollTo(originalColor: OriginalColor, anchor: UnitPoint = .top) {
 //        guard let index = colorList.firstIndex(where: {$0.name == name}) else {
 //            return
 //        }
-        randomColorName = name
-        proxy?.scrollTo(name, anchor: anchor)
+        randomColorHex = originalColor.hex
+        proxy?.scrollTo(randomColorHex, anchor: anchor)
 //        if index == 0 {
 //        } else {
 ////            let lastName = colorList[index - 1].name

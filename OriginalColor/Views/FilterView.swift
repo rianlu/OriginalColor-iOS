@@ -22,7 +22,7 @@ struct FilterView: View {
                         Text(NSLocalizedString(item, comment: ""))
                         Spacer()
                         if item == viewModel.filter {
-                            Image(systemName: "checkmark")
+                            Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(viewModel.themeColor)
                         }
                     }

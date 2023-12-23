@@ -13,6 +13,7 @@ struct ColorItemView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment (\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var viewModel: ColorViewModel
+    // item 滚动偏移动画
     @State var ietmScaleAnimation = false
     
     var body: some View {
@@ -45,12 +46,12 @@ struct ColorItemView: View {
         .frame(height: cardHeight)
         .contentShape(Rectangle())
         .scaleEffect(
-            x: ietmScaleAnimation ? 1.05 : 1.0,
-            y: ietmScaleAnimation ? 1.1 : 1.0
+            x: ietmScaleAnimation ? 1.1 : 1.0,
+            y: ietmScaleAnimation ? 1.05 : 1.0
         )
         .onAppear {
             withAnimation(.spring(duration: 0.15, bounce: 0.5)) {
-                ietmScaleAnimation = color.name == viewModel.randomColorName
+                ietmScaleAnimation = color.hex == viewModel.randomColorHex
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 withAnimation(.spring(duration: 0.2, bounce: 0.8)) {

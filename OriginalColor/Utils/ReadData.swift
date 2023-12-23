@@ -16,13 +16,16 @@ class ReadData: ObservableObject {
     }
     
     func loadData() {
-        guard let file = Bundle.main.url(forResource: "colors", withExtension: "json")
+        self.colors = loadJson(fileName: "colors") + loadJson(fileName: "cfs-color")
+    }
+    
+    func loadJson(fileName: String) -> [OriginalColor] {
+        guard let file = Bundle.main.url(forResource: fileName, withExtension: "json")
             else {
                 print("Json file not found")
-                return
+                return []
             }
         let data = try? Data(contentsOf: file)
-        let colors = try? JSONDecoder().decode([OriginalColor].self, from: data!)
-        self.colors = colors!
+        return (try? JSONDecoder().decode([OriginalColor].self, from: data!)) ?? []
     }
 }

@@ -13,11 +13,19 @@ struct DataService {
                 store: UserDefaults(suiteName: "group.com.wzl.originalcolor")) 
     var savedThemeColor: String = "#f86b1d"
     @Environment(\.colorScheme) var colorScheme
+    private var colorList: [OriginalColor] = []
+
+    init() {
+        colorList = ReadData().colors
+    }
     
     func getWidgetColor() -> OriginalColor {
-        let colorList = ReadData().colors
         return colorList.first {
             $0.hex == savedThemeColor
-        } ?? colorList[Int.random(in: 0..<colorList.count)]
+        } ?? getRandomColor()
+    }
+    
+    func getRandomColor() -> OriginalColor {
+        return colorList[Int.random(in: 0..<colorList.count)]
     }
 }

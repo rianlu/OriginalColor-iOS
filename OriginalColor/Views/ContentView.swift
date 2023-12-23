@@ -68,7 +68,7 @@ struct ContentView: View {
                                 ScrollView {
                                     // 不适用自带的spacing，直接设置在item里
                                     LazyVGrid(columns: columns, spacing: 0) {
-                                        ForEach(viewModel.filterColorList, id: \.name) { color in
+                                        ForEach(viewModel.filterColorList, id: \.hex) { color in
                                             ColorItemView(color: color)
                                                 .padding(.top, 16)
 //                                                .padding(
@@ -101,7 +101,7 @@ struct ContentView: View {
                                 // 与切换主题时的 Loading 联动
                                 if isLoading {
                                     isLoading.toggle()
-                                    viewModel.scrollTo(name: currentColor.name)
+                                    viewModel.scrollTo(originalColor: currentColor)
                                 }
                             }
 //                            .simultaneousGesture(
@@ -111,14 +111,9 @@ struct ContentView: View {
 //                                }))
                             .onOpenURL(perform: { url in
                                 guard let query = url.query() else { return }
-                                let index = query.index(query.startIndex, offsetBy: 5)
-                                let name = query.suffix(from: index)
-                                    .removingPercentEncoding
-                                if (name != nil && viewModel.filterColorList.contains {
-                                    $0.name == name
-                                }) {
-                                    viewModel.scrollTo(name: name!)
-                                }
+                                guard let hex = query.removingPercentEncoding?.components(separatedBy: "&hex=").last else { return }
+                                guard let widgetColor = viewModel.findColorByHex(hex: hex) else { return }
+                                viewModel.scrollTo(originalColor: widgetColor)
                             })
                         }
                     }
@@ -134,6 +129,11 @@ struct ContentView: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             navigationLeadingVIew
                         }
+//                        ToolbarItem(placement: .principal) {
+//                            Text("CFBundleDisplayName").onTapGesture {
+//                                viewModel.scrollTo(originalColor: currentColor)
+//                            }
+//                        }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(
                                 destination: SettingsScreen(currentColor: currentColor), label: {
@@ -189,7 +189,7 @@ struct ContentView: View {
                     HapticManager.instance.impact(style: .soft)
                 }
                 randomAngle += 720.0
-                viewModel.scrollTo(name: viewModel.filterColorList[randomPosition].name)
+                viewModel.scrollTo(originalColor: viewModel.filterColorList[randomPosition])
                 // item 滚动偏移动画
                 searchOrTop = false
             }
@@ -213,7 +213,7 @@ struct Fab: View {
                 if count == 0 {
                     return
                 }
-                viewModel.scrollTo(name: viewModel.filterColorList[0].name)
+                viewModel.scrollTo(originalColor: viewModel.filterColorList[0])
                 searchOrTop = true
             }
         }, label: {
