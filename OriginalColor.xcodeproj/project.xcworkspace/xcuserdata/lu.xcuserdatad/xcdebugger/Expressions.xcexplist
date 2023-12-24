@@ -28,6 +28,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CopyItemView.body.getter:CopyListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "orientation != .compact">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in ColorItemView.body.getter:ColorItemView.swift">
       </ContextState>
    </ContextStates>

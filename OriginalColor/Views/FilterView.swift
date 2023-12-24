@@ -10,9 +10,9 @@ import SwiftUI
 struct FilterView: View {
     
     @EnvironmentObject var viewModel: ColorViewModel
-    @State private var searchText = ""
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    @Binding var searchText: String
     
     var body: some View {
         NavigationStack {
@@ -29,6 +29,7 @@ struct FilterView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         viewModel.filterColorList(filter: item)
+                        searchText = ""
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
@@ -42,11 +43,10 @@ struct FilterView: View {
     }
 }
 
-struct SearchFilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterView()
-            .environmentObject(ColorViewModel())
-            .environment(\.locale, .init(identifier: "zh-Hans"))
+#Preview {
+    @State var searchText = ""
+    return FilterView(searchText: $searchText)
+        .environmentObject(ColorViewModel())
+        .environment(\.locale, .init(identifier: "zh-Hans"))
 //            .environment(\.locale, .init(identifier: "en"))
-    }
 }

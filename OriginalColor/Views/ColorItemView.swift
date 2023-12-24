@@ -86,7 +86,6 @@ struct ColorItemView: View {
 }
 
 struct ColorItemView_Previews: PreviewProvider {
-    @State static var changeThemeColor = false
     static var previews: some View {
         let viewModel = ColorViewModel()
         ColorItemView(color: viewModel.getCurrentThemeColor())

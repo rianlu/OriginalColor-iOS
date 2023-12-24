@@ -31,6 +31,9 @@ struct ContentView: View {
     
     // 选中的 Item
     @State var selectedItem: OriginalColor?
+    
+    // 搜索
+    @State private var searchText = ""
 
     var columns: [GridItem] {
         switch horizontalSizeClass {
@@ -144,7 +147,7 @@ struct ContentView: View {
                 }
                 .transition(.opacity)
                 .accentColor(themeColor)
-                .sheet(isPresented: $showFilter) {FilterView()}
+                .sheet(isPresented: $showFilter) {FilterView( searchText: $searchText)}
                 .environmentObject(viewModel)
                 .transition(AnyTransition.opacity.combined(with: .slide))
                 .onAppear {
