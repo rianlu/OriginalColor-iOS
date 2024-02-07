@@ -95,7 +95,7 @@ struct SmallContentView: View {
             HStack() {
                 Spacer()
                 Text(entry.color.name)
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.bold)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
@@ -124,7 +124,7 @@ struct MediumContentView: View {
                 .foregroundColor(cardColor).opacity(0.6)
                 .brightness(cardColor.isLight() ? -0.3 : -0.1)
             Text(entry.color.name)
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(cardColor)
                 .brightness(cardColor.isLight() ? -0.3 : -0.1)
@@ -146,13 +146,13 @@ struct LargeContentView: View {
                 HStack {
                     Spacer()
                     Text(entry.color.pinyin.uppercased())
-                        .font(.system(size: 80, weight: .bold, design: .rounded))
+                        .font(.system(size: 70, weight: .bold, design: .rounded))
                         .lineLimit(3)
                         .multilineTextAlignment(.center)
                         .scaleEffect(1.5)
                         .foregroundColor(cardColor).opacity(0.2)
                         .brightness(cardColor.isLight() ? -0.3 : -0.1)
-                        .blur(radius: 5)
+                        .blur(radius: 3)
                     Spacer()
                 }
                 Spacer()
@@ -162,7 +162,7 @@ struct LargeContentView: View {
                 HStack {
                     Spacer()
                     Text(entry.color.name)
-                        .font(.system(size: 60, weight: .bold, design: .rounded))
+                        .font(.system(size: 55, weight: .bold, design: .rounded))
                         .foregroundColor(cardColor)
                         .brightness(cardColor.isLight() ? -0.3 : -0.1)
                         .minimumScaleFactor(0.5)
@@ -191,7 +191,7 @@ struct ColorWidget: Widget {
         }
         .contentMarginsDisabled()
         .configurationDisplayName("CFBundleDisplayName")
-        .description("This is an example widget.")
+        .description("ColorWidget")
     }
 }
 
@@ -199,6 +199,22 @@ struct ColorWidget: Widget {
     ColorWidget()
 } timeline: {
     let data = DataService()
-    SimpleEntry(date: .now, color: OriginalColor(RGB: [23, 129, 181], name: "釉蓝", pinyin: "youlan"))
     SimpleEntry(date: .now, color: data.getWidgetColor())
+    SimpleEntry(date: .now, color: OriginalColor(RGB: [23, 129, 181], name: "釉蓝", pinyin: "youlan"))
+}
+
+#Preview(as: .systemMedium) {
+    ColorWidget()
+} timeline: {
+    let data = DataService()
+    SimpleEntry(date: .now, color: data.getWidgetColor())
+    SimpleEntry(date: .now, color: OriginalColor(RGB: [23, 129, 181], name: "釉蓝", pinyin: "youlan"))
+}
+
+#Preview(as: .systemLarge) {
+    ColorWidget()
+} timeline: {
+    let data = DataService()
+    SimpleEntry(date: .now, color: data.getWidgetColor())
+    SimpleEntry(date: .now, color: OriginalColor(RGB: [23, 129, 181], name: "釉蓝", pinyin: "youlan"))
 }

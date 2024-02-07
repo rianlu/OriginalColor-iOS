@@ -30,16 +30,15 @@ struct ColorItemView: View {
                 )
             VStack(alignment: .leading) {
                 Text(color.pinyin.uppercased())
-                    .font(.title3)
+                    .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(cardColor).opacity(0.6)
                     .brightness(cardColor.isLight() ? -0.3 : -0.1)
                 Text(color.name)
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(cardColor)
                     .brightness(cardColor.isLight() ? -0.3 : -0.1)
-                    .padding(.top, 2)
             }
             .padding()
         }

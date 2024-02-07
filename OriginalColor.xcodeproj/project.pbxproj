@@ -10,7 +10,6 @@
 		890BE6952A67E01600B56DD2 /* ColorShareCardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */; };
 		894978E92A78F83800BEAC77 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894978E82A78F83800BEAC77 /* HapticManager.swift */; };
 		8951C9EA2AC6C3C70011314D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8951C9E72AC6ADD90011314D /* LoadingView.swift */; };
-		8982F4512AAC62FD00FA2718 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */; };
 		898337F72A55506100A815B7 /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898337F62A55506100A815B7 /* ReadData.swift */; };
 		89A2F59A2A53E5E500C59108 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5992A53E5E500C59108 /* ContentView.swift */; };
 		89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A2F59B2A53E5E600C59108 /* Assets.xcassets */; };
@@ -19,7 +18,6 @@
 		89A418B32AC42EEE0093DEC7 /* OriginalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A2F5A62A53FBA300C59108 /* OriginalColor.swift */; };
 		89A418B42AC42F2C0093DEC7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F32A57F0E200BF6135 /* Extensions.swift */; };
 		89A418B82AC43B7E0093DEC7 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CF40DC2A595E6200D5BC1D /* colors.json */; };
-		89A418B92AC43C1A0093DEC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89D0F92B2AAC083200E6FA08 /* Localizable.strings */; };
 		89A4A9F22A57E00400BF6135 /* OriginalColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F12A57E00400BF6135 /* OriginalColorApp.swift */; };
 		89A4A9F42A57F0E200BF6135 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F32A57F0E200BF6135 /* Extensions.swift */; };
 		89A4A9F62A57F47B00BF6135 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4A9F52A57F47B00BF6135 /* SettingsScreen.swift */; };
@@ -34,9 +32,10 @@
 		89C08A112AC18CC300CC5A8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89C08A102AC18CC300CC5A8A /* Assets.xcassets */; };
 		89C08A152AC18CC300CC5A8A /* ColorWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 89C08A052AC18CC000CC5A8A /* ColorWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		89C08A1C2AC1924500CC5A8A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C08A1B2AC1924500CC5A8A /* DataService.swift */; };
+		89C34BF12B733611001DB8BE /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 89C34BF02B733611001DB8BE /* Localizable.xcstrings */; };
+		89C34BF22B733611001DB8BE /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 89C34BF02B733611001DB8BE /* Localizable.xcstrings */; };
 		89C541362B35901500F5019A /* cfs-color.json in Resources */ = {isa = PBXBuildFile; fileRef = 89C541352B35901500F5019A /* cfs-color.json */; };
 		89CF40DD2A595E6200D5BC1D /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CF40DC2A595E6200D5BC1D /* colors.json */; };
-		89D0F9292AAC083200E6FA08 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89D0F92B2AAC083200E6FA08 /* Localizable.strings */; };
 		89D94FD42A5D3C9D004E818B /* CopyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D94FD32A5D3C9D004E818B /* CopyListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,9 +67,6 @@
 		890BE6942A67E01600B56DD2 /* ColorShareCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShareCardItem.swift; sourceTree = "<group>"; };
 		894978E82A78F83800BEAC77 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		8951C9E72AC6ADD90011314D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		8982F4522AAC62FD00FA2718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SplashScreen.storyboard; sourceTree = "<group>"; };
-		8982F4552AAC630000FA2718 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SplashScreen.strings"; sourceTree = "<group>"; };
-		8982F4572AAC630000FA2718 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SplashScreen.strings; sourceTree = "<group>"; };
 		898337F62A55506100A815B7 /* ReadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadData.swift; sourceTree = "<group>"; };
 		89A2F5942A53E5E500C59108 /* OriginalColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OriginalColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A2F5992A53E5E500C59108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,10 +90,9 @@
 		89C08A122AC18CC300CC5A8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89C08A1A2AC190E600CC5A8A /* ColorWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorWidgetExtension.entitlements; sourceTree = "<group>"; };
 		89C08A1B2AC1924500CC5A8A /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		89C34BF02B733611001DB8BE /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		89C541352B35901500F5019A /* cfs-color.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cfs-color.json"; sourceTree = "<group>"; };
 		89CF40DC2A595E6200D5BC1D /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
-		89D0F92A2AAC083200E6FA08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		89D0F92C2AAC083B00E6FA08 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		89D94FD32A5D3C9D004E818B /* CopyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,8 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				89C08A1A2AC190E600CC5A8A /* ColorWidgetExtension.entitlements */,
-				89D0F92B2AAC083200E6FA08 /* Localizable.strings */,
-				8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */,
+				89C34BF02B733611001DB8BE /* Localizable.xcstrings */,
 				89A2F5962A53E5E500C59108 /* OriginalColor */,
 				89C08A0B2AC18CC000CC5A8A /* ColorWidget */,
 				89C08A062AC18CC000CC5A8A /* Frameworks */,
@@ -277,7 +271,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					89A2F5932A53E5E500C59108 = {
 						CreatedOnToolsVersion = 14.2;
@@ -313,8 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A2F59C2A53E5E600C59108 /* Assets.xcassets in Resources */,
-				89D0F9292AAC083200E6FA08 /* Localizable.strings in Resources */,
-				8982F4512AAC62FD00FA2718 /* SplashScreen.storyboard in Resources */,
+				89C34BF12B733611001DB8BE /* Localizable.xcstrings in Resources */,
 				89C541362B35901500F5019A /* cfs-color.json in Resources */,
 				89CF40DD2A595E6200D5BC1D /* colors.json in Resources */,
 			);
@@ -325,7 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C08A112AC18CC300CC5A8A /* Assets.xcassets in Resources */,
-				89A418B92AC43C1A0093DEC7 /* Localizable.strings in Resources */,
+				89C34BF22B733611001DB8BE /* Localizable.xcstrings in Resources */,
 				89A418B82AC43B7E0093DEC7 /* colors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,33 +370,12 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		8982F4532AAC62FD00FA2718 /* SplashScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8982F4522AAC62FD00FA2718 /* Base */,
-				8982F4552AAC630000FA2718 /* zh-Hans */,
-				8982F4572AAC630000FA2718 /* en */,
-			);
-			name = SplashScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		89D0F92B2AAC083200E6FA08 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				89D0F92A2AAC083200E6FA08 /* en */,
-				89D0F92C2AAC083B00E6FA08 /* zh-Hans */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		89A2F5A12A53E5E600C59108 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -433,6 +405,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -462,6 +435,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -491,6 +465,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

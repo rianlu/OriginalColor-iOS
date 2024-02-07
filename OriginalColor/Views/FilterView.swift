@@ -43,10 +43,15 @@ struct FilterView: View {
     }
 }
 
-#Preview {
+#Preview("English") {
+    @State var searchText = ""
+    return FilterView(searchText: $searchText)
+        .environmentObject(ColorViewModel())
+}
+
+#Preview("zh-Hans") {
     @State var searchText = ""
     return FilterView(searchText: $searchText)
         .environmentObject(ColorViewModel())
         .environment(\.locale, .init(identifier: "zh-Hans"))
-//            .environment(\.locale, .init(identifier: "en"))
 }

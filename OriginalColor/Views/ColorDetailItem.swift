@@ -95,14 +95,14 @@ struct IPadColorDetailItem: View {
                 }
                 Text(color.pinyin.uppercased())
                     .padding(.top, 8)
-                    .font(.system(size: 88, weight: .semibold, design: .rounded))
+                    .font(.system(size: 70, weight: .semibold, design: .rounded))
                     .foregroundColor(themeColor).opacity(0.3)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .brightness(colorScheme == .light ? -0.1 : 0.1)
                 Text(color.name)
                     .foregroundColor(themeColor).opacity(0.9)
-                    .font(.system(size: 70, weight: .bold, design: .rounded))
+                    .font(.system(size: 55, weight: .bold, design: .rounded))
                     .brightness(colorScheme == .light ? -0.1 : 0.1)
                 HStack {
                     RoundedRectangle(cornerRadius: 16)
