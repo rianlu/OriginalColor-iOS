@@ -58,8 +58,9 @@ struct ColorDetailItem: View {
             }
             .padding()
         }
+        .frame(height: 249)
         .onAppear { render() }
-        .presentationDetents([.height(250)])
+        .presentationDetents([.height(249)])
         .presentationDragIndicator(.visible)
     }
     
@@ -133,11 +134,12 @@ struct IPadColorDetailItem: View {
     }
 }
 
-struct ColorDetailItem_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let color = ColorViewModel().getCurrentThemeColor()
-        ColorDetailItem(color: color)
-        IPadColorDetailItem(color: color)
-    }
+#Preview("iPhone") {
+    let color = ColorViewModel().getCurrentThemeColor()
+    return ColorDetailItem(color: color)
+}
+
+#Preview("iPad") {
+    let color = ColorViewModel().getCurrentThemeColor()
+    return IPadColorDetailItem(color: color)
 }
